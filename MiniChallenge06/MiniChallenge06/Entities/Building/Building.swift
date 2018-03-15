@@ -11,6 +11,7 @@ import SceneKit
 
 class Building: SCNNode {
     
+    //MARK:- Functions
     func addFloor(floor: FloorNode) {
         floor.position.y = Float(self.childNodes.count) * Float(floor.blockSize)
         self.addChildNode(floor)
@@ -22,8 +23,8 @@ class Building: SCNNode {
                 node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
             }
         }
-        
     }
+    
 }
 
 

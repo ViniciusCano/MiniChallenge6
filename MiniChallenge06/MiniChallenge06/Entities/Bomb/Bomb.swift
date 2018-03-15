@@ -45,7 +45,7 @@ class Bomb: SCNNode {
         let gravity = SCNPhysicsField.radialGravity()
         gravity.strength = -power
         gravity.falloffExponent = 2
-        
+
         self.physicsField = gravity
         self.runAction(SCNAction.sequence([SCNAction.wait(duration: 2),SCNAction.run({ (node) in
             node.removeFromParentNode()

@@ -12,7 +12,7 @@ import ARKit
 
 class Stage: UIViewController, ARSCNViewDelegate {
 
-    var bomb = Bomb(radius: 0.05)
+    var bomb = Bomb(radius: 0.2)
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
@@ -72,15 +72,16 @@ extension Stage {
             
             self.didSetPlane = true
             
-            var building = Building.init()
+            let building = Building.init()
             sceneView.scene.rootNode.addChildNode(building)
             building.addFloor(floor: FloorNode(numberOfXBlocks: 10, numberOfZBlocks: 10))
             
-            
+            bomb.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
             sceneView.scene.rootNode.addChildNode(bomb)
         }
     }
     
+    // Update
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if !didUpdatePlane && didSetPlane {
             self.mainPlane.geometry = SCNPlane(width: CGFloat.infinity, height: CGFloat.infinity)
@@ -88,8 +89,9 @@ extension Stage {
             self.didUpdatePlane = true
         }
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        bomb.explode(power: -50000)
+        bomb.explode(power: -500)
     }
     
 }

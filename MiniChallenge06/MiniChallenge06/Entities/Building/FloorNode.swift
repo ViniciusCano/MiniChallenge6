@@ -11,10 +11,12 @@ import SceneKit
 
 class FloorNode: SCNNode {
     
+    //MARK:- Variables
     var numberOfXBlocks: Int?
     var numberOfZBlocks: Int?
     var blockSize: CGFloat = 0.1
     
+    //MARK:- Initializers
     override init() {
         super.init()
     }

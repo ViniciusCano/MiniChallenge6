@@ -11,6 +11,7 @@ import SceneKit
 
 class ColumnFloorNode: FloorNode{
     
+    //MARK:- Initializer
     init(coordinates: [(Int, Int)]) {
         super.init()
         
