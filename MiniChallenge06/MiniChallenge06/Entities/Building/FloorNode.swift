@@ -13,7 +13,7 @@ class FloorNode: SCNNode {
     
     var numberOfXBlocks: Int?
     var numberOfZBlocks: Int?
-    var blockSize: CGFloat = 5
+    var blockSize: CGFloat = 0.1
     
     override init() {
         super.init()
@@ -34,7 +34,7 @@ class FloorNode: SCNNode {
         planeNode.physicsBody?.damping = 1
         planeNode.physicsBody?.restitution = 0
         
-        self.addChildNode(planeNode)
+//        self.addChildNode(planeNode)
         
         for i in 0...numberOfXBlocks - 1 {
             for j in 0...numberOfZBlocks - 1 {

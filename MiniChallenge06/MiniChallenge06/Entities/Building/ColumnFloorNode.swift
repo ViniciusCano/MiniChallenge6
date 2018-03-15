@@ -18,7 +18,7 @@ class ColumnFloorNode: FloorNode{
             let column = SCNBox(width: blockSize, height: blockSize, length: blockSize, chamferRadius: 0)
             column.firstMaterial?.diffuse.contents = UIColor.red
             let node = SCNNode(geometry: column)
-            let plane = SCNPlane(width: 5, height: 5)
+            let plane = SCNPlane(width: 0.5, height: 0.5)
             let planeNode = SCNNode(geometry: plane)
 //            planeNode.eulerAngles = SCNVector3.init(-Float.pi/2, 0, 0)
 //            planeNode.position = SCNVector3.init(0, blockSize/2, 0)

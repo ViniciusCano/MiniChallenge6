@@ -12,6 +12,8 @@ import ARKit
 
 class Stage: UIViewController, ARSCNViewDelegate {
 
+    var bomb = Bomb(radius: 0.05)
+    
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
     
@@ -20,20 +22,24 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //Control Variables
     var didSetPlane = false
+    var didUpdatePlane = false
     
     //MARK:- Overrided Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupSceneView()
+        
+        //teste
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {        super.viewWillDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,6 +69,27 @@ extension Stage {
             guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
             self.mainPlane = Plane(with: planeAnchor)
             node.addChildNode(mainPlane)
+            
+            self.didSetPlane = true
+            
+            var building = Building.init()
+            sceneView.scene.rootNode.addChildNode(building)
+            building.addFloor(floor: FloorNode(numberOfXBlocks: 10, numberOfZBlocks: 10))
+            
+            
+            sceneView.scene.rootNode.addChildNode(bomb)
         }
     }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        if !didUpdatePlane && didSetPlane {
+            self.mainPlane.geometry = SCNPlane(width: CGFloat.infinity, height: CGFloat.infinity)
+            
+            self.didUpdatePlane = true
+        }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        bomb.explode(power: -50000)
+    }
+    
 }
