@@ -42,6 +42,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Functions
     func setupSceneView() {
+        //Debug Options
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, .showBoundingBoxes, .showPhysicsShapes]
+        
         //Base Bonfigurations
         sceneView.delegate = self
         sceneView.showsStatistics = true
@@ -58,7 +61,7 @@ extension Stage {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if !didSetPlane {
             guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-            self.mainPlane = Plane(with: anchor as! ARPlaneAnchor)
+            self.mainPlane = Plane(with: planeAnchor)
             node.addChildNode(mainPlane)
         }
     }
