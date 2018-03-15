@@ -14,6 +14,10 @@
 		B03725E7205AFA20007968B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B03725E6205AFA20007968B3 /* Assets.xcassets */; };
 		B03725EA205AFA20007968B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B03725E8205AFA20007968B3 /* LaunchScreen.storyboard */; };
 		B03725F5205AFA21007968B3 /* MiniChallenge06Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03725F4205AFA21007968B3 /* MiniChallenge06Tests.swift */; };
+		B0372603205AFBF1007968B3 /* FloorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03725FF205AFBF1007968B3 /* FloorNode.swift */; };
+		B0372604205AFBF1007968B3 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0372600205AFBF1007968B3 /* Building.swift */; };
+		B0372605205AFBF1007968B3 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0372601205AFBF1007968B3 /* Bomb.swift */; };
+		B0372606205AFBF1007968B3 /* ColumnFloorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0372602205AFBF1007968B3 /* ColumnFloorNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		B03725F0205AFA21007968B3 /* MiniChallenge06Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiniChallenge06Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B03725F4205AFA21007968B3 /* MiniChallenge06Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniChallenge06Tests.swift; sourceTree = "<group>"; };
 		B03725F6205AFA21007968B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B03725FF205AFBF1007968B3 /* FloorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloorNode.swift; sourceTree = "<group>"; };
+		B0372600205AFBF1007968B3 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		B0372601205AFBF1007968B3 /* Bomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
+		B0372602205AFBF1007968B3 /* ColumnFloorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnFloorNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +87,11 @@
 		B03725DC205AFA20007968B3 /* MiniChallenge06 */ = {
 			isa = PBXGroup;
 			children = (
-				B03725DD205AFA20007968B3 /* AppDelegate.swift */,
+				B0372607205AFC0F007968B3 /* Entities */,
 				B03725DF205AFA20007968B3 /* art.scnassets */,
-				B03725E1205AFA20007968B3 /* ViewController.swift */,
 				B03725E3205AFA20007968B3 /* Main.storyboard */,
+				B03725DD205AFA20007968B3 /* AppDelegate.swift */,
+				B03725E1205AFA20007968B3 /* ViewController.swift */,
 				B03725E6205AFA20007968B3 /* Assets.xcassets */,
 				B03725E8205AFA20007968B3 /* LaunchScreen.storyboard */,
 				B03725EB205AFA20007968B3 /* Info.plist */,
@@ -97,6 +106,33 @@
 				B03725F6205AFA21007968B3 /* Info.plist */,
 			);
 			path = MiniChallenge06Tests;
+			sourceTree = "<group>";
+		};
+		B0372607205AFC0F007968B3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				B0372609205AFC31007968B3 /* Bomb */,
+				B0372608205AFC24007968B3 /* Building */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		B0372608205AFC24007968B3 /* Building */ = {
+			isa = PBXGroup;
+			children = (
+				B0372600205AFBF1007968B3 /* Building.swift */,
+				B0372602205AFBF1007968B3 /* ColumnFloorNode.swift */,
+				B03725FF205AFBF1007968B3 /* FloorNode.swift */,
+			);
+			path = Building;
+			sourceTree = "<group>";
+		};
+		B0372609205AFC31007968B3 /* Bomb */ = {
+			isa = PBXGroup;
+			children = (
+				B0372601205AFBF1007968B3 /* Bomb.swift */,
+			);
+			path = Bomb;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +240,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B03725E2205AFA20007968B3 /* ViewController.swift in Sources */,
+				B0372603205AFBF1007968B3 /* FloorNode.swift in Sources */,
 				B03725DE205AFA20007968B3 /* AppDelegate.swift in Sources */,
+				B0372605205AFBF1007968B3 /* Bomb.swift in Sources */,
+				B0372606205AFBF1007968B3 /* ColumnFloorNode.swift in Sources */,
+				B0372604205AFBF1007968B3 /* Building.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
