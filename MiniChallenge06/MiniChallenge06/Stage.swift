@@ -108,8 +108,8 @@ extension Stage {
             
             let width = CGFloat(planeAnchor.extent.x)
             let height = CGFloat(planeAnchor.extent.z)
-            plane.width = width
-            plane.height = height
+            plane.width = 30
+            plane.height = 30
             
             let x = CGFloat(planeAnchor.center.x)
             let y = CGFloat(planeAnchor.center.y)
