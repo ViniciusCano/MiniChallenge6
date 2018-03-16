@@ -12,44 +12,48 @@ import ARKit
 
 class Stage: UIViewController, ARSCNViewDelegate {
 
-    var bomb = Bomb(radius: 0.2)
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
     
     //MARK:- Variables
     var mainPlane = SCNNode()
+    var bomb = Bomb(radius: 0.1)
+    let building = Building()
     
     //Control Variables
     var didSetPlane = false
     var didUpdatePlane = false
+    
     
     //MARK:- Overrided Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupSceneView()
-        
-        //teste
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {        super.viewWillDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let tap = touches.first else { return }
+        self.addBuilding(touch: tap)
+    }
+    
     //MARK:- Functions
     func setupSceneView() {
         //Debug Options
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, .showBoundingBoxes, .showPhysicsShapes]
+        sceneView.debugOptions = [.showPhysicsShapes]
         
         //Base Bonfigurations
         sceneView.delegate = self
@@ -60,38 +64,71 @@ class Stage: UIViewController, ARSCNViewDelegate {
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
     }
+    
+    func addBuilding(touch: UITouch) {
+        let tapLocation = touch.location(in: sceneView)
+        let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
+        
+        guard let hitTestResult = hitTestResults.first else { return }
+        let translation = hitTestResult.worldTransform.translation
+        
+        let x = translation.x
+//        let y = translation.y + building.boundingBox.max.y/2
+        let y = translation.y
+        let z = translation.z
+        
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.position = SCNVector3.init(x, y + 0.2, z)
+        self.building.activate()
+        
+        sceneView.scene.rootNode.addChildNode(building)
+    }
 }
 
 //MARK:- ARSCNViewDelegate
 extension Stage {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if !didSetPlane {
+            //Add Plane
             guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
             self.mainPlane = Plane(with: planeAnchor)
+            self.mainPlane.eulerAngles.x = -.pi / 2
             node.addChildNode(mainPlane)
             
             self.didSetPlane = true
-            
-            let building = Building.init()
-            sceneView.scene.rootNode.addChildNode(building)
-            building.addFloor(floor: FloorNode(numberOfXBlocks: 10, numberOfZBlocks: 10))
-            
-            bomb.position = SCNVector3(x: 0.0, y: 0.0, z: 0.0)
-            sceneView.scene.rootNode.addChildNode(bomb)
         }
     }
     
-    // Update
+    //Update
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if !didUpdatePlane && didSetPlane {
-            self.mainPlane.geometry = SCNPlane(width: CGFloat.infinity, height: CGFloat.infinity)
+            guard let planeAnchor = anchor as?  ARPlaneAnchor,
+                let plane = mainPlane.childNodes.first?.geometry as? SCNPlane
+                else { return }
+            
+            let width = CGFloat(planeAnchor.extent.x)
+            let height = CGFloat(planeAnchor.extent.z)
+            plane.width = width
+            plane.height = height
+            
+            let x = CGFloat(planeAnchor.center.x)
+            let y = CGFloat(planeAnchor.center.y)
+            let z = CGFloat(planeAnchor.center.z)
+            
+            mainPlane.position = SCNVector3(x, y, z)
+            
+            mainPlane.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: plane, options: nil))
             
             self.didUpdatePlane = true
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        bomb.explode(power: -500)
-    }
-    
 }
+
+//Float4x4 Extension
+extension float4x4 {
+    var translation: float3 {
+        let translation = self.columns.3
+        return float3(translation.x, translation.y, translation.z)
+    }
+}
+

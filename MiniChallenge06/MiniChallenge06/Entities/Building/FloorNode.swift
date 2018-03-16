@@ -27,14 +27,14 @@ class FloorNode: SCNNode {
         self.numberOfXBlocks = numberOfXBlocks
         self.numberOfZBlocks = numberOfZBlocks
         
-        let plane = SCNPlane(width: CGFloat(numberOfXBlocks) * blockSize, height: CGFloat(numberOfZBlocks) * blockSize)
-        plane.firstMaterial?.diffuse.contents = UIColor.red
-        let planeNode = SCNNode(geometry: plane)
-        planeNode.position = SCNVector3.init(((CGFloat(numberOfXBlocks)*blockSize)/2) - blockSize/2, -blockSize/2, (CGFloat(numberOfZBlocks)*blockSize)/2 - blockSize/2)
-        planeNode.eulerAngles = SCNVector3.init(-Float.pi/2, 0, 0)
-        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-        planeNode.physicsBody?.damping = 1
-        planeNode.physicsBody?.restitution = 0
+//        let plane = SCNPlane(width: CGFloat(numberOfXBlocks) * blockSize, height: CGFloat(numberOfZBlocks) * blockSize)
+//        plane.firstMaterial?.diffuse.contents = UIColor.red
+//        let planeNode = SCNNode(geometry: plane)
+//        planeNode.position = SCNVector3.init(((CGFloat(numberOfXBlocks)*blockSize)/2) - blockSize/2, -blockSize/2, (CGFloat(numberOfZBlocks)*blockSize)/2 - blockSize/2)
+//        planeNode.eulerAngles = SCNVector3.init(-Float.pi/2, 0, 0)
+//        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+//        planeNode.physicsBody?.damping = 1
+//        planeNode.physicsBody?.restitution = 0
         
 //        self.addChildNode(planeNode)
         
@@ -44,9 +44,9 @@ class FloorNode: SCNNode {
                 block.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/textura.jpg")
                 let node = SCNNode(geometry: block)
                 node.position = SCNVector3.init(blockSize * CGFloat(i), 0.01, blockSize * CGFloat(j))
-                node.physicsBody?.categoryBitMask = 1
-                node.physicsBody?.collisionBitMask = 1
-                node.physicsBody?.contactTestBitMask = 1
+//                node.physicsBody?.categoryBitMask = 1
+//                node.physicsBody?.collisionBitMask = 1
+//                node.physicsBody?.contactTestBitMask = 1
                 
                 
                 
