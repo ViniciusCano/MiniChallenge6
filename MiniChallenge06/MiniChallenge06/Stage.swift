@@ -73,12 +73,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
         let translation = hitTestResult.worldTransform.translation
         
         let x = translation.x
-//        let y = translation.y + building.boundingBox.max.y/2
         let y = translation.y
         let z = translation.z
         
         self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.position = SCNVector3.init(x, y + 0.2, z)
+        self.building.position = SCNVector3.init(x, y, z)
         self.building.activate()
         
         sceneView.scene.rootNode.addChildNode(building)

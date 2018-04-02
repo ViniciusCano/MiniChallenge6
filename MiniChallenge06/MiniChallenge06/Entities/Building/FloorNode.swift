@@ -50,7 +50,7 @@ class FloorNode: SCNNode {
                 
                 
                 
-                node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+                node.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: block, options: nil))
                 node.physicsBody?.friction = 1
                 node.physicsBody?.restitution = 0
                 node.physicsBody?.damping = 1

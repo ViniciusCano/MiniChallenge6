@@ -20,7 +20,8 @@ class Building: SCNNode {
     func activate(){
         for item in self.childNodes {
             for node in item.childNodes {
-                node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+//                node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+                node.physicsBody?.type = .dynamic
             }
         }
     }
