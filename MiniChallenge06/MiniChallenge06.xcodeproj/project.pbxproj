@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7577BF42205B04B800B1F97F /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7577BF41205B04B800B1F97F /* Plane.swift */; };
 		B03725DE205AFA20007968B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03725DD205AFA20007968B3 /* AppDelegate.swift */; };
-		B03725E0205AFA20007968B3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B03725DF205AFA20007968B3 /* art.scnassets */; };
-		B03725E2205AFA20007968B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03725E1205AFA20007968B3 /* ViewController.swift */; };
+		B03725E2205AFA20007968B3 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03725E1205AFA20007968B3 /* Stage.swift */; };
 		B03725E5205AFA20007968B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B03725E3205AFA20007968B3 /* Main.storyboard */; };
 		B03725E7205AFA20007968B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B03725E6205AFA20007968B3 /* Assets.xcassets */; };
 		B03725EA205AFA20007968B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B03725E8205AFA20007968B3 /* LaunchScreen.storyboard */; };
@@ -31,10 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7577BF41205B04B800B1F97F /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		B03725DA205AFA20007968B3 /* MiniChallenge06.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChallenge06.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B03725DD205AFA20007968B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B03725DF205AFA20007968B3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		B03725E1205AFA20007968B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B03725E1205AFA20007968B3 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		B03725E4205AFA20007968B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B03725E6205AFA20007968B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B03725E9205AFA20007968B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7577BF43205B067000B1F97F /* World Detection */ = {
+			isa = PBXGroup;
+			children = (
+				7577BF41205B04B800B1F97F /* Plane.swift */,
+			);
+			path = "World Detection";
+			sourceTree = "<group>";
+		};
 		B03725D1205AFA20007968B3 = {
 			isa = PBXGroup;
 			children = (
@@ -87,11 +95,10 @@
 		B03725DC205AFA20007968B3 /* MiniChallenge06 */ = {
 			isa = PBXGroup;
 			children = (
-				B0372607205AFC0F007968B3 /* Entities */,
-				B03725DF205AFA20007968B3 /* art.scnassets */,
-				B03725E3205AFA20007968B3 /* Main.storyboard */,
 				B03725DD205AFA20007968B3 /* AppDelegate.swift */,
-				B03725E1205AFA20007968B3 /* ViewController.swift */,
+				B03725E1205AFA20007968B3 /* Stage.swift */,
+				B0372607205AFC0F007968B3 /* Entities */,
+				B03725E3205AFA20007968B3 /* Main.storyboard */,
 				B03725E6205AFA20007968B3 /* Assets.xcassets */,
 				B03725E8205AFA20007968B3 /* LaunchScreen.storyboard */,
 				B03725EB205AFA20007968B3 /* Info.plist */,
@@ -111,6 +118,7 @@
 		B0372607205AFC0F007968B3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				7577BF43205B067000B1F97F /* World Detection */,
 				B0372609205AFC31007968B3 /* Bomb */,
 				B0372608205AFC24007968B3 /* Building */,
 			);
@@ -218,7 +226,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B03725E0205AFA20007968B3 /* art.scnassets in Resources */,
 				B03725EA205AFA20007968B3 /* LaunchScreen.storyboard in Resources */,
 				B03725E7205AFA20007968B3 /* Assets.xcassets in Resources */,
 				B03725E5205AFA20007968B3 /* Main.storyboard in Resources */,
@@ -239,12 +246,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B03725E2205AFA20007968B3 /* ViewController.swift in Sources */,
+				B03725E2205AFA20007968B3 /* Stage.swift in Sources */,
 				B0372603205AFBF1007968B3 /* FloorNode.swift in Sources */,
 				B03725DE205AFA20007968B3 /* AppDelegate.swift in Sources */,
 				B0372605205AFBF1007968B3 /* Bomb.swift in Sources */,
 				B0372606205AFBF1007968B3 /* ColumnFloorNode.swift in Sources */,
 				B0372604205AFBF1007968B3 /* Building.swift in Sources */,
+				7577BF42205B04B800B1F97F /* Plane.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

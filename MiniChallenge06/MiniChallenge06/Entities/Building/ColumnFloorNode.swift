@@ -11,6 +11,7 @@ import SceneKit
 
 class ColumnFloorNode: FloorNode{
     
+    //MARK:- Initializer
     init(coordinates: [(Int, Int)]) {
         super.init()
         
@@ -18,7 +19,7 @@ class ColumnFloorNode: FloorNode{
             let column = SCNBox(width: blockSize, height: blockSize, length: blockSize, chamferRadius: 0)
             column.firstMaterial?.diffuse.contents = UIColor.red
             let node = SCNNode(geometry: column)
-            let plane = SCNPlane(width: 5, height: 5)
+            let plane = SCNPlane(width: 0.5, height: 0.5)
             let planeNode = SCNNode(geometry: plane)
 //            planeNode.eulerAngles = SCNVector3.init(-Float.pi/2, 0, 0)
 //            planeNode.position = SCNVector3.init(0, blockSize/2, 0)
@@ -26,7 +27,7 @@ class ColumnFloorNode: FloorNode{
 //            planeNode.physicsBody?.collisionBitMask = 1
 //            planeNode.physicsBody?.contactTestBitMask = 1
 //            planeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-            node.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+            node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
 //            node.addChildNode(planeNode)
             
             node.position = SCNVector3.init(CGFloat(x)*blockSize, 0, CGFloat(z)*blockSize)
