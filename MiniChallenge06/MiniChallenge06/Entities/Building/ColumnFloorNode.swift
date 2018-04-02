@@ -27,7 +27,7 @@ class ColumnFloorNode: FloorNode{
 //            planeNode.physicsBody?.collisionBitMask = 1
 //            planeNode.physicsBody?.contactTestBitMask = 1
 //            planeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-            node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+            node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: column, options: nil))
 //            node.addChildNode(planeNode)
             
             node.position = SCNVector3.init(CGFloat(x)*blockSize, 0, CGFloat(z)*blockSize)

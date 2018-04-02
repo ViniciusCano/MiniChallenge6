@@ -27,16 +27,16 @@ class FloorNode: SCNNode {
         self.numberOfXBlocks = numberOfXBlocks
         self.numberOfZBlocks = numberOfZBlocks
         
-//        let plane = SCNPlane(width: CGFloat(numberOfXBlocks) * blockSize, height: CGFloat(numberOfZBlocks) * blockSize)
-//        plane.firstMaterial?.diffuse.contents = UIColor.red
-//        let planeNode = SCNNode(geometry: plane)
-//        planeNode.position = SCNVector3.init(((CGFloat(numberOfXBlocks)*blockSize)/2) - blockSize/2, -blockSize/2, (CGFloat(numberOfZBlocks)*blockSize)/2 - blockSize/2)
-//        planeNode.eulerAngles = SCNVector3.init(-Float.pi/2, 0, 0)
-//        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+        let plane = SCNPlane(width: CGFloat(numberOfXBlocks) * blockSize, height: CGFloat(numberOfZBlocks) * blockSize)
+        plane.firstMaterial?.diffuse.contents = UIColor.red
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.position = SCNVector3.init(((CGFloat(numberOfXBlocks)*blockSize)/2) - blockSize/2, -blockSize/2, (CGFloat(numberOfZBlocks)*blockSize)/2 - blockSize/2)
+        planeNode.eulerAngles = SCNVector3.init(-Float.pi/2, 0, 0)
+        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: plane, options: nil))
 //        planeNode.physicsBody?.damping = 1
 //        planeNode.physicsBody?.restitution = 0
         
-//        self.addChildNode(planeNode)
+        self.addChildNode(planeNode)
         
         for i in 0...numberOfXBlocks - 1 {
             for j in 0...numberOfZBlocks - 1 {
@@ -51,9 +51,9 @@ class FloorNode: SCNNode {
                 
                 
                 node.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: block, options: nil))
-                node.physicsBody?.friction = 1
-                node.physicsBody?.restitution = 0
-                node.physicsBody?.damping = 1
+//                node.physicsBody?.friction = 1
+//                node.physicsBody?.restitution = 0
+//                node.physicsBody?.damping = 1
 //                node.physicsBody?.mass = 30
 //                node.physicsBody?.isAffectedByGravity = false
                 super.addChildNode(node)

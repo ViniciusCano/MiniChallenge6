@@ -53,7 +53,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
         if !didSetBuilding {
             self.addBuilding(touch: tap)
         } else {
-            print("entrou")
             self.bomb.explode(power: 20)
         }
     }
@@ -86,7 +85,16 @@ class Stage: UIViewController, ARSCNViewDelegate {
         let y = translation.y
         let z = translation.z
         
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
         self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        
+        
         self.building.position = SCNVector3.init(x, y + 0.1, z)
         self.building.activate()
         
