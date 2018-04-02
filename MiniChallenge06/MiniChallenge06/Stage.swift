@@ -25,6 +25,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     var didSetPlane = false
     var didUpdatePlane = false
     
+    var didSetBuilding = false
+    
     
     //MARK:- Overrided Functions
     override func viewDidLoad() {
@@ -47,7 +49,13 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let tap = touches.first else { return }
-        self.addBuilding(touch: tap)
+        
+        if !didSetBuilding {
+            self.addBuilding(touch: tap)
+        } else {
+            print("entrou")
+            self.bomb.explode(power: 20)
+        }
     }
     
     //MARK:- Functions
@@ -66,6 +74,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     
     func addBuilding(touch: UITouch) {
+        
+        //Add Building
         let tapLocation = touch.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
         
@@ -77,10 +87,16 @@ class Stage: UIViewController, ARSCNViewDelegate {
         let z = translation.z
         
         self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.position = SCNVector3.init(x, y, z)
+        self.building.position = SCNVector3.init(x, y + 0.1, z)
         self.building.activate()
         
         sceneView.scene.rootNode.addChildNode(building)
+        self.didSetBuilding = true
+        
+        //Add Bomb (Test)
+        self.bomb.position = SCNVector3.init(x + 0.2, y + 0.2, z)
+        sceneView.scene.rootNode.addChildNode(bomb)
+        
     }
 }
 
