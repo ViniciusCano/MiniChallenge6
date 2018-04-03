@@ -13,7 +13,7 @@ class Building: SCNNode {
     
     //MARK:- Functions
     func addFloor(floor: FloorNode) {
-        floor.position.y = Float(self.childNodes.count) * Float(floor.blockSize)
+        floor.position.y = (Float(self.childNodes.count) * Float(floor.blockSize)) + 0.01
         self.addChildNode(floor)
     }
     
@@ -21,7 +21,8 @@ class Building: SCNNode {
         for item in self.childNodes {
             for node in item.childNodes {
 //                node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-                node.physicsBody?.type = .dynamic
+                node.physicsBody?.type = .static
+                node.physicsBody?.clearAllForces()
             }
         }
     }
