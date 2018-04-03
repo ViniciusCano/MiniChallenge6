@@ -53,6 +53,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         if !didSetBuilding {
             self.addBuilding(touch: tap)
         } else {
+            self.building.activate()
             self.bomb.explode(power: 20)
         }
     }
@@ -85,29 +86,27 @@ class Stage: UIViewController, ARSCNViewDelegate {
         let y = translation.y
         let z = translation.z
         
-        let a = SCNBox(width: 20, height: 0.2, length: 20, chamferRadius: 0)
-        a.firstMaterial?.diffuse.contents = UIColor.clear
-        let node = SCNNode(geometry: a)
-        node.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: a, options: nil))
-        node.position = SCNVector3.init(x, y, z)
-        node.physicsBody?.damping = 1
-        node.physicsBody?.friction = 1
-        node.physicsBody?.restitution = 0
-        self.sceneView.scene.rootNode.addChildNode(node)
         
-        
-        self.building.addFloor(floor: ColumnFloorNode(
-            coordinates: [(0, 0), (0, 4), (4, 0), (4, 4), (3, 3), (1, 2)]))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
         self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
         self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
         self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
         
-        
-        
         self.building.position = SCNVector3.init(x, y + 0.2 / 2, z)
         
         sceneView.scene.rootNode.addChildNode(building)
-        self.building.activate()
         self.didSetBuilding = true
         
         //Add Bomb (Test)
@@ -149,11 +148,8 @@ extension Stage {
             mainPlane.position = SCNVector3(x, y, z)
             
             mainPlane.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: plane, options: nil))
-            mainPlane.physicsBody?.damping = 1
             
             self.didUpdatePlane = true
-            
-            print("Update no plano")
         }
     }
 }

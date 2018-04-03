@@ -19,11 +19,9 @@ class ColumnFloorNode: FloorNode{
             let column = SCNBox(width: blockSize, height: blockSize, length: blockSize, chamferRadius: 0)
             column.firstMaterial?.diffuse.contents = UIColor.red
             let node = SCNNode(geometry: column)
-            node.physicsBody?.damping = 1
-            node.physicsBody?.friction = 1
-            node.physicsBody?.restitution = 0
-            node.physicsBody?.mass = 1
-            node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(geometry: column, options: nil))
+//            node.physicsBody?.friction = 1
+//            node.physicsBody?.restitution = 0
+            node.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: column, options: nil))
             
             node.position = SCNVector3.init(CGFloat(x)*blockSize, 0, CGFloat(z)*blockSize)
             super.addChildNode(node)
