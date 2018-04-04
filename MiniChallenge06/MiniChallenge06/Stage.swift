@@ -53,7 +53,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         if !didSetBuilding {
             self.addBuilding(touch: tap)
         } else {
-            print("entrou")
+            self.building.activate()
             self.bomb.explode(power: 20)
         }
     }
@@ -86,17 +86,32 @@ class Stage: UIViewController, ARSCNViewDelegate {
         let y = translation.y
         let z = translation.z
         
+        
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
         self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.position = SCNVector3.init(x, y + 0.1, z)
-        self.building.activate()
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
+        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
+        
+        self.building.position = SCNVector3.init(x, y + 0.2 / 2, z)
         
         sceneView.scene.rootNode.addChildNode(building)
         self.didSetBuilding = true
         
         //Add Bomb (Test)
-        self.bomb.position = SCNVector3.init(x + 0.2, y + 0.2, z)
+        self.bomb.position = SCNVector3.init(x + 0.5, y + 0.5, z)
         sceneView.scene.rootNode.addChildNode(bomb)
-        
     }
 }
 
