@@ -18,19 +18,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xe-z3-ajb">
-                                <rect key="frame" x="172" y="318" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xe-z3-ajb">
+                                <rect key="frame" x="59" y="518" width="256" height="56"/>
+                                <state key="normal" image="Play_Button"/>
                                 <connections>
-                                    <segue destination="e0q-IN-MXY" kind="show" id="9zr-uH-Ooz"/>
+                                    <segue destination="e0q-IN-MXY" kind="show" id="22I-IB-ZmI"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="boe-0F-Mce">
+                                <rect key="frame" x="27" y="112" width="320" height="141"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="boe-0F-Mce" firstAttribute="top" secondItem="FEh-AJ-buw" secondAttribute="top" constant="112" id="0HM-xw-Bje"/>
+                            <constraint firstItem="6Xe-z3-ajb" firstAttribute="leading" secondItem="wES-id-PjV" secondAttribute="leading" constant="59" id="Jk7-Yo-oYV"/>
+                            <constraint firstItem="boe-0F-Mce" firstAttribute="leading" secondItem="wES-id-PjV" secondAttribute="leading" constant="27" id="bN6-P0-bcS"/>
+                            <constraint firstItem="boe-0F-Mce" firstAttribute="centerX" secondItem="FEh-AJ-buw" secondAttribute="centerX" id="dhK-gZ-9nc"/>
+                            <constraint firstItem="6Xe-z3-ajb" firstAttribute="top" secondItem="FEh-AJ-buw" secondAttribute="top" constant="518" id="ftj-yF-ebT"/>
+                            <constraint firstItem="6Xe-z3-ajb" firstAttribute="centerX" secondItem="FEh-AJ-buw" secondAttribute="centerX" id="lRe-Pq-tts"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wES-id-PjV"/>
                     </view>
                     <navigationItem key="navigationItem" id="BYT-8w-0Kn"/>
+                    <connections>
+                        <outlet property="logoImageLeadingConstraint" destination="bN6-P0-bcS" id="Cws-qd-MBF"/>
+                        <outlet property="logoImageTopConstraint" destination="0HM-xw-Bje" id="SwX-Af-gdT"/>
+                        <outlet property="playButtonLeadingConstraint" destination="Jk7-Yo-oYV" id="EvY-7t-Rp4"/>
+                        <outlet property="playButtonTopConstraint" destination="ftj-yF-ebT" id="WNt-Jn-BXw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0SZ-Y1-122" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,8 +93,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhq-ev-FeC">
-                                <rect key="frame" x="166" y="318" width="43" height="30"/>
+                                <rect key="frame" x="163" y="317" width="48" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Fase 1"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="show" id="ZIe-Jh-Gkj"/>
@@ -94,4 +111,8 @@
             <point key="canvasLocation" x="41" y="99"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo" width="274" height="141"/>
+        <image name="Play_Button" width="256" height="56"/>
+    </resources>
 </document>
