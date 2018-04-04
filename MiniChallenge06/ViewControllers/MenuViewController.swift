@@ -17,8 +17,6 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var logoImageTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var logoImageLeadingConstraint: NSLayoutConstraint!
     
-    let transition = CATransition()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +32,13 @@ class MenuViewController: UIViewController {
         logoImageTopConstraint.constant = view.frame.size.height * 0.191
         logoImageLeadingConstraint.constant = view.frame.size.width * 0.078
         
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    override var prefersStatusBarHidden: Bool{
+        return true
     }
 
     override func didReceiveMemoryWarning() {

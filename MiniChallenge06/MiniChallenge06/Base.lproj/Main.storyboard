@@ -92,19 +92,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhq-ev-FeC">
-                                <rect key="frame" x="163" y="317" width="48" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Fase 1"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhq-ev-FeC">
+                                <rect key="frame" x="55" y="106" width="96" height="98"/>
+                                <state key="normal" image="Fase1_Button"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="show" id="ZIe-Jh-Gkj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngt-7A-EBI">
+                                <rect key="frame" x="223" y="106" width="96" height="98"/>
+                                <state key="normal" image="Fase2_Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bhq-ev-FeC" firstAttribute="leading" secondItem="CyT-Sp-beq" secondAttribute="leading" constant="55" id="Csq-yL-nhW"/>
+                            <constraint firstItem="bhq-ev-FeC" firstAttribute="top" secondItem="LRn-is-TGp" secondAttribute="top" constant="106" id="Ed9-Vi-ZSH"/>
+                            <constraint firstItem="CyT-Sp-beq" firstAttribute="trailing" secondItem="bhq-ev-FeC" secondAttribute="trailing" constant="224" id="KIT-Br-9Ib"/>
+                            <constraint firstAttribute="bottom" secondItem="ngt-7A-EBI" secondAttribute="bottom" constant="463" id="LPD-fl-dBa"/>
+                            <constraint firstItem="CyT-Sp-beq" firstAttribute="bottom" secondItem="bhq-ev-FeC" secondAttribute="bottom" constant="463" id="OaE-M1-qub"/>
+                            <constraint firstAttribute="trailing" secondItem="ngt-7A-EBI" secondAttribute="trailing" constant="56" id="SfS-kx-zRt"/>
+                            <constraint firstItem="ngt-7A-EBI" firstAttribute="top" secondItem="LRn-is-TGp" secondAttribute="top" constant="106" id="XUO-Xg-eD8"/>
+                            <constraint firstItem="ngt-7A-EBI" firstAttribute="leading" secondItem="LRn-is-TGp" secondAttribute="leading" constant="223" id="um9-uQ-mEf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="CyT-Sp-beq"/>
                     </view>
+                    <connections>
+                        <outlet property="level1ButtonBottomConstraint" destination="OaE-M1-qub" id="ZVr-RW-cAF"/>
+                        <outlet property="level1ButtonLeadingConstraint" destination="Csq-yL-nhW" id="ecG-Wz-kGX"/>
+                        <outlet property="level1ButtonTopConstraint" destination="Ed9-Vi-ZSH" id="GrL-dt-Mdx"/>
+                        <outlet property="level1ButtonTrailingConstraint" destination="KIT-Br-9Ib" id="YmW-hG-g6S"/>
+                        <outlet property="level2ButtonBottomConstraint" destination="LPD-fl-dBa" id="xVE-ac-FLK"/>
+                        <outlet property="level2ButtonLeadingConstraint" destination="um9-uQ-mEf" id="zAN-h8-9Fp"/>
+                        <outlet property="level2ButtonTopConstraint" destination="XUO-Xg-eD8" id="Cyu-Bn-UKk"/>
+                        <outlet property="level2ButtonTrailingConstraint" destination="SfS-kx-zRt" id="An1-Q4-f84"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xm-ex-gcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -112,6 +134,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Fase1_Button" width="96" height="98"/>
+        <image name="Fase2_Button" width="96" height="98"/>
         <image name="Logo" width="274" height="141"/>
         <image name="Play_Button" width="256" height="56"/>
     </resources>
