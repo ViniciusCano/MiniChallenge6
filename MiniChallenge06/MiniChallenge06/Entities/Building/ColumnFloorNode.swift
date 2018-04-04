@@ -21,8 +21,8 @@ class ColumnFloorNode: FloorNode{
             let node = SCNNode(geometry: column)
 //            node.physicsBody?.friction = 1
 //            node.physicsBody?.restitution = 0
-            node.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: column, options: nil))
-            
+            node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: column, options: nil))
+//            node.geometry?.boundingBox.max.y
             node.position = SCNVector3.init(CGFloat(x)*blockSize, 0, CGFloat(z)*blockSize)
             super.addChildNode(node)
         }

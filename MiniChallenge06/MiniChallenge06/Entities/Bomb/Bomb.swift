@@ -35,7 +35,7 @@ class Bomb: SCNNode {
     func explode() {
         let gravity = SCNPhysicsField.radialGravity()
         gravity.strength = -10000
-        gravity.falloffExponent = 2
+        gravity.falloffExponent = 0.5
         
         self.physicsField = gravity
         self.removeFromParentNode()
@@ -44,7 +44,7 @@ class Bomb: SCNNode {
     func explode(power: CGFloat) {
         let gravity = SCNPhysicsField.radialGravity()
         gravity.strength = -power
-        gravity.falloffExponent = 2
+        gravity.falloffExponent = 0.5
 
         self.physicsField = gravity
         self.runAction(SCNAction.sequence([SCNAction.wait(duration: 2),SCNAction.run({ (node) in

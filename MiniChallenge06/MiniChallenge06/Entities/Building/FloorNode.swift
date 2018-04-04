@@ -35,7 +35,7 @@ class FloorNode: SCNNode {
             -blockSize/2,
             (CGFloat(numberOfZBlocks)*blockSize)/2 - blockSize/2)
         planeNode.eulerAngles = SCNVector3.init(-Float.pi/2, 0, 0)
-        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: plane, options: nil))
+        planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: plane, options: nil))
 //        planeNode.physicsBody?.friction = 1
 //        planeNode.physicsBody?.restitution = 0
         
@@ -48,7 +48,7 @@ class FloorNode: SCNNode {
                 let node = SCNNode(geometry: block)
                 node.position = SCNVector3.init(blockSize * CGFloat(i), 0, blockSize * CGFloat(j))
                 
-                node.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: block, options: nil))
+                node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: block, options: nil))
 //                node.physicsBody?.friction = 1
 //                node.physicsBody?.restitution = 0
                 

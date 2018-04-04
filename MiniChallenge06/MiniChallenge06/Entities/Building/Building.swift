@@ -17,16 +17,39 @@ class Building: SCNNode {
         self.addChildNode(floor)
     }
     
-    func activate(){
+    func activate(bomb: Bomb) {
+        print(bomb.worldPosition)
+        let bombRoundedPositionX = round(1000 * bomb.worldPosition.x) / 1000 + 0.1
+        let bombRoundedPositionY = round(1000 * bomb.worldPosition.y) / 1000 + 0.1
+        let bombRoundedPositionZ = round(1000 * bomb.worldPosition.z) / 1000 + 0.1
+        
         for item in self.childNodes {
             for node in item.childNodes {
-                node.physicsBody = nil
-                guard let nodeGeometry = node.geometry else { return }
-                node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(geometry: nodeGeometry, options: nil))
+                let blockSize = Float((node.parent as! FloorNode).blockSize)
+                print(node.worldPosition.x, node.worldPosition.y, node.worldPosition.z)
+                if ((round(1000 * node.worldPosition.x) / 1000) <= bombRoundedPositionX + blockSize) && ((round(1000 * node.worldPosition.y) / 1000) <= bombRoundedPositionY + blockSize) && ((round(1000 * node.worldPosition.z) / 1000) <= bombRoundedPositionZ + blockSize) {
+                    node.physicsBody = nil
+                    guard let nodeGeometry = node.geometry else { return }
+                    node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(geometry: nodeGeometry, options: nil))
+                }
             }
         }
     }
+}
+
+
+extension SCNVector3 {
+    func length() -> Float {
+        return sqrtf(x*x + y*y + z*z)
+    }
     
+    static func - (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+        return SCNVector3Make(left.x - right.x, left.y - right.y, left.z - right.z)
+    }
+    
+    func distance(vector: SCNVector3) -> Float {
+        return (self - vector).length()
+    }
 }
 
 

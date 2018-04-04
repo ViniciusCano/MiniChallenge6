@@ -29,7 +29,7 @@ class Plane: SCNNode {
         
         planeNode.position = SCNVector3(x,y,z)
         planeNode.opacity = 0.5
-        planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(geometry: planeGeometry, options: nil))
+        planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: planeGeometry, options: nil))
         
         
         
