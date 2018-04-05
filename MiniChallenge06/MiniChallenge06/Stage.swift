@@ -56,8 +56,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         if !didSetBuilding {
             self.addBuilding(touch: tap)
-        } else if !didPlaceBombs {
+        } else if bombs.count < maxBombs {
             self.placeBomb(touch: tap)
+        } else {
+            print("Explodiu")
+            self.explodeBombs()
         }
     }
     
@@ -134,7 +137,16 @@ class Stage: UIViewController, ARSCNViewDelegate {
         bomb.position = SCNVector3.init(x, y, z)
         sceneView.scene.rootNode.addChildNode(bomb)
         self.bombs.append(bomb)
+        
+        print(bombs)
 
+    }
+    
+    func explodeBombs() {
+        for bomb in bombs {
+            self.building.activate(bomb: bomb)
+            bomb.explode(power: 20)
+        }
     }
     
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
