@@ -152,7 +152,7 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kz7-oM-a3z">
-                                <rect key="frame" x="38" y="243" width="300" height="181"/>
+                                <rect key="frame" x="37" y="243" width="300" height="181"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueP-4E-xIn">
                                         <rect key="frame" x="10" y="75" width="90" height="30"/>

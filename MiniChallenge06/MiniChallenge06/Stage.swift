@@ -53,10 +53,13 @@ class Stage: UIViewController, ARSCNViewDelegate {
     var bombs: [Bomb] = [] {
         didSet {
             self.bombLabel.text = String(maxBombs - bombs.count)
+
+            if bombs.count > 0 {
+                self.explosionButton.isEnabled = true                
+            }
             
             if bombs.count >= maxBombs {
                 self.didPlaceBombs = true
-                self.explosionButton.isEnabled = true
             }
         }
     }
@@ -113,6 +116,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.bombLabel.text = String(maxBombs)
         
         self.explosionButton.isEnabled = false
+
+        self.pauseView.layer.cornerRadius = 10
+        
     }
     
     func setupSceneView() {
