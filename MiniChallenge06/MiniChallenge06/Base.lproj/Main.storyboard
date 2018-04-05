@@ -68,22 +68,6 @@
             </objects>
             <point key="canvasLocation" x="-1962" y="99"/>
         </scene>
-        <!--Stage-->
-        <scene sceneID="tXr-a1-R10">
-            <objects>
-                <viewController id="BV1-FR-VrT" customClass="Stage" customModule="MiniChallenge06" customModuleProvider="target" sceneMemberID="viewController">
-                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </arscnView>
-                    <connections>
-                        <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1098" y="99"/>
-        </scene>
         <!--Levels View Controller-->
         <scene sceneID="xWs-d4-qcE">
             <objects>
@@ -96,7 +80,7 @@
                                 <rect key="frame" x="55" y="106" width="96" height="98"/>
                                 <state key="normal" image="Fase1_Button"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="ZIe-Jh-Gkj"/>
+                                    <segue destination="pkM-g3-ADA" kind="show" id="LcF-dO-snW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngt-7A-EBI">
@@ -131,6 +115,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xm-ex-gcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="41" y="99"/>
+        </scene>
+        <!--Stage-->
+        <scene sceneID="7RM-AR-9BE">
+            <objects>
+                <viewController id="pkM-g3-ADA" customClass="Stage" customModule="MiniChallenge06" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ux2-ig-9Aj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wm0-z2-i5L">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </arscnView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8kh-z6-zA2" firstAttribute="bottom" secondItem="Wm0-z2-i5L" secondAttribute="bottom" id="ciV-p9-1Zg"/>
+                            <constraint firstItem="Wm0-z2-i5L" firstAttribute="leading" secondItem="8kh-z6-zA2" secondAttribute="leading" id="l8q-9n-EWH"/>
+                            <constraint firstAttribute="trailing" secondItem="Wm0-z2-i5L" secondAttribute="trailing" id="lLD-Uq-THX"/>
+                            <constraint firstItem="Wm0-z2-i5L" firstAttribute="top" secondItem="8kh-z6-zA2" secondAttribute="top" id="uNF-ze-lO8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8kh-z6-zA2"/>
+                    </view>
+                    <connections>
+                        <outlet property="sceneView" destination="Wm0-z2-i5L" id="8jv-2B-osY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T6g-ur-9MH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1022" y="85"/>
         </scene>
     </scenes>
     <resources>
