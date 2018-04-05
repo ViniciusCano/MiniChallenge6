@@ -11,6 +11,9 @@ import SceneKit
 
 class Building: SCNNode {
     
+    //MARK:- Variables
+    var movedNodes = 0
+    
     //MARK:- Functions
     func addFloor(floor: FloorNode) {
         floor.position.y = (Float(self.childNodes.count) * Float(floor.blockSize))
@@ -18,7 +21,7 @@ class Building: SCNNode {
     }
     
     func activate(bomb: SCNNode) {
-        print(bomb.worldPosition)
+        self.movedNodes = 0
         let bombRoundedPositionX = round(1000 * bomb.worldPosition.x) / 1000 + 0.1
         let bombRoundedPositionY = round(1000 * bomb.worldPosition.y) / 1000 + 0.1
         let bombRoundedPositionZ = round(1000 * bomb.worldPosition.z) / 1000 + 0.1
@@ -40,15 +43,18 @@ class Building: SCNNode {
                     (((round(1000 * node.worldPosition.x) / 1000) >= bombRoundedPositionX + blockSize + 0.1) && ((round(1000 * node.worldPosition.y) / 1000) <= bombRoundedPositionY + blockSize) && ((round(1000 * node.worldPosition.z) / 1000) <= bombRoundedPositionZ + blockSize)) ||
                     (((round(1000 * node.worldPosition.x) / 1000) >= bombRoundedPositionX + blockSize + 0.1) && ((round(1000 * node.worldPosition.y) / 1000) >= bombRoundedPositionY + blockSize + 0.1) && ((round(1000 * node.worldPosition.z) / 1000) <= bombRoundedPositionZ + blockSize)) ||
                     (((round(1000 * node.worldPosition.x) / 1000) <= bombRoundedPositionX + blockSize) && ((round(1000 * node.worldPosition.y) / 1000) <= bombRoundedPositionY + blockSize) && ((round(1000 * node.worldPosition.z) / 1000) >= bombRoundedPositionZ + blockSize + 0.1)) ||
-                    (((round(1000 * node.worldPosition.x) / 1000) >= bombRoundedPositionX + blockSize + 0.1) && ((round(1000 * node.worldPosition.y) / 1000) <= bombRoundedPositionY + blockSize) && ((round(1000 * node.worldPosition.z) / 1000) >= bombRoundedPositionZ + blockSize + 0.1))
-                    {
+                    (((round(1000 * node.worldPosition.x) / 1000) >= bombRoundedPositionX + blockSize + 0.1) && ((round(1000 * node.worldPosition.y) / 1000) <= bombRoundedPositionY + blockSize) && ((round(1000 * node.worldPosition.z) / 1000) >= bombRoundedPositionZ + blockSize + 0.1)) {
                     
                     node.physicsBody = nil
-                    guard let nodeGeometry = node.geometry else { return }
+                    guard let nodeGeometry = node.geometry else { return 0 }
                     node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(geometry: nodeGeometry, options: nil))
+                    
+                    self.movedNodes += 1
                 }
             }
         }
+        
+        return movedNodes
     }
 }
 

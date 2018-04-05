@@ -49,7 +49,7 @@ class Bomb: SCNNode {
         gravity.falloffExponent = 0.5
 
         self.physicsField = gravity
-        self.runAction(SCNAction.sequence([SCNAction.wait(duration: 2),SCNAction.run({ (node) in
+        self.runAction(SCNAction.sequence([SCNAction.wait(duration: 0.2),SCNAction.run({ (node) in
             node.removeFromParentNode()
         })]))
         

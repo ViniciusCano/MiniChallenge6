@@ -19,10 +19,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var explosionButton: UIButton!
     @IBOutlet weak var bombLabel: UILabel!
     @IBOutlet weak var pauseView: UIView!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func explosionButtonClicked(_ sender: Any) {
         if !isPaused {
-            self.explodeBombs()            
+            self.explodeBombs()
         }
     }
     
@@ -63,6 +64,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
             }
         }
     }
+    var score = 0 {
+        didSet {
+            self.scoreLabel.text = String(score / bombs.count)
+        }
+    }
     
     let building = Building()
     
@@ -88,7 +94,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupHUD()
         
     }
@@ -121,6 +127,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Functions
     func setupHUD() {
         self.bombLabel.text = String(maxBombs)
+        self.scoreLabel.text = String(self.score)
         
         self.explosionButton.isEnabled = false
         
@@ -223,8 +230,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
             bomb.runAction(SCNAction.sequence([SCNAction.wait(duration: 2),SCNAction.run({ (node) in
                 node.removeFromParentNode()
             })]))
+            self.score += self.building.activate(bomb: bomb)
         }
-        
         self.explosionButton.isEnabled = false
     }
     
@@ -237,6 +244,10 @@ class Stage: UIViewController, ARSCNViewDelegate {
             return (dir, pos)
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
+    }
+    
+    override var prefersStatusBarHidden: Bool{
+        return true
     }
     
     func shouldAutorotate() -> Bool {
