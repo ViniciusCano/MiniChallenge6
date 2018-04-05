@@ -155,27 +155,37 @@
                                 <rect key="frame" x="38" y="243" width="300" height="181"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueP-4E-xIn">
-                                        <rect key="frame" x="10" y="75" width="60" height="30"/>
+                                        <rect key="frame" x="10" y="75" width="90" height="30"/>
                                         <state key="normal" title="MENU"/>
                                         <connections>
                                             <action selector="menuButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="81C-bB-Afj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTk-Bm-2be">
-                                        <rect key="frame" x="120" y="75" width="60" height="30"/>
+                                        <rect key="frame" x="105" y="75" width="90" height="30"/>
                                         <state key="normal" title="PLAY"/>
                                         <connections>
                                             <action selector="playButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="jdp-H0-Uw7"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwv-Ae-Pv2">
+                                        <rect key="frame" x="200" y="75" width="90" height="30"/>
+                                        <state key="normal" title="RESTART"/>
+                                        <connections>
+                                            <action selector="restartClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="OOH-aH-0gW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="zTk-Bm-2be" firstAttribute="width" secondItem="Kz7-oM-a3z" secondAttribute="width" multiplier="0.2" id="I8Y-7s-uNa"/>
+                                    <constraint firstAttribute="trailing" secondItem="dwv-Ae-Pv2" secondAttribute="trailing" constant="10" id="E2y-1e-YCZ"/>
+                                    <constraint firstItem="zTk-Bm-2be" firstAttribute="width" secondItem="Kz7-oM-a3z" secondAttribute="width" multiplier="0.3" id="I8Y-7s-uNa"/>
+                                    <constraint firstItem="dwv-Ae-Pv2" firstAttribute="width" secondItem="Kz7-oM-a3z" secondAttribute="width" multiplier="0.3" id="Iky-39-vek"/>
                                     <constraint firstItem="zTk-Bm-2be" firstAttribute="centerY" secondItem="Kz7-oM-a3z" secondAttribute="centerY" id="Nca-Qd-eVP"/>
+                                    <constraint firstItem="dwv-Ae-Pv2" firstAttribute="centerY" secondItem="Kz7-oM-a3z" secondAttribute="centerY" id="REH-lw-jYD"/>
                                     <constraint firstItem="zTk-Bm-2be" firstAttribute="centerX" secondItem="Kz7-oM-a3z" secondAttribute="centerX" id="WSD-xW-uR1"/>
                                     <constraint firstItem="ueP-4E-xIn" firstAttribute="centerY" secondItem="Kz7-oM-a3z" secondAttribute="centerY" id="a0F-RN-AFd"/>
-                                    <constraint firstItem="ueP-4E-xIn" firstAttribute="width" secondItem="Kz7-oM-a3z" secondAttribute="width" multiplier="0.2" id="aox-iG-IcR"/>
+                                    <constraint firstItem="ueP-4E-xIn" firstAttribute="width" secondItem="Kz7-oM-a3z" secondAttribute="width" multiplier="0.3" id="aox-iG-IcR"/>
                                     <constraint firstItem="ueP-4E-xIn" firstAttribute="leading" secondItem="Kz7-oM-a3z" secondAttribute="leading" constant="10" id="phQ-Qe-BGX"/>
                                 </constraints>
                             </view>

@@ -42,6 +42,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    @IBAction func restartClicked(_ sender: Any) {
+        //Matar a tela e construir de novo
+    }
     
     //MARK:- Variables
     var mainPlane = SCNNode()
