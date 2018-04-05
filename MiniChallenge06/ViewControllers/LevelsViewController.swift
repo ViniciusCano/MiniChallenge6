@@ -30,14 +30,14 @@ class LevelsViewController: UIViewController {
         self.view.insertSubview(background, at: 0)
         
         //Constraints
-        level1ButtonTopConstraint.constant = view.frame.size.height * 0.092
+        level1ButtonTopConstraint.constant = view.frame.size.height * 0.0929
         level1ButtonLeadingConstraint.constant = view.frame.size.width * 0.12
-        level1ButtonBottomConstraint.constant = view.frame.size.height * 0.814
+        level1ButtonBottomConstraint.constant = view.frame.size.height * 0.760
         level1ButtonTrailingConstraint.constant = view.frame.size.width * 0.624
         
-        level2ButtonTopConstraint.constant = view.frame.size.height * 0.092
+        level2ButtonTopConstraint.constant = view.frame.size.height * 0.0929
         level2ButtonLeadingConstraint.constant = view.frame.size.width * 0.621
-        level2ButtonBottomConstraint.constant = view.frame.size.height * 0.814
+        level2ButtonBottomConstraint.constant = view.frame.size.height * 0.760
         level2ButtonTrailingConstraint.constant = view.frame.size.width * 0.122
         
         navigationController?.isNavigationBarHidden = false
@@ -45,6 +45,14 @@ class LevelsViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool{
         return true
+    }
+    
+    func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.portrait ]
     }
 
     override func didReceiveMemoryWarning() {

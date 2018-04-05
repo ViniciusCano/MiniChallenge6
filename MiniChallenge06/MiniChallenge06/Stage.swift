@@ -72,6 +72,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     let building = Building()
     
+    var planeContact: [SCNNode] = []
+    
     //Control Variables
     var didSetPlane = false
     var didUpdatePlane = false
@@ -88,6 +90,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         self.setupSceneView()
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        
         self.setupHUD()
 
     }
@@ -130,7 +137,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     func setupSceneView() {
         //Debug Options
-        sceneView.debugOptions = [.showPhysicsShapes]
+        //sceneView.debugOptions = [.showPhysicsShapes]
         
         //Base Bonfigurations
         sceneView.delegate = self
@@ -224,6 +231,15 @@ class Stage: UIViewController, ARSCNViewDelegate {
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
+    
+    func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.portrait ]
+    }
+    
 }
 
 //MARK:- ARSCNViewDelegate
@@ -264,6 +280,27 @@ extension Stage {
         }
     }
 }
+
+extension Stage: SCNPhysicsContactDelegate {
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        if contact.nodeA == mainPlane {
+            planeContact.append(contact.nodeB)
+        }
+        if contact.nodeB == mainPlane {
+            planeContact.append(contact.nodeA)
+        }
+    }
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
+        if contact.nodeA == mainPlane {
+            planeContact.removeLast()
+        }
+        if contact.nodeB == mainPlane {
+            planeContact.removeLast()
+        }
+    }
+}
+
 
 //Float4x4 Extension
 extension float4x4 {
