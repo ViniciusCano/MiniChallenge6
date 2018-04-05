@@ -36,7 +36,15 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.isPaused = false
     }
     
+    @IBAction func menuButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true) {
+            
+        }
+    }
     
+    @IBAction func restartClicked(_ sender: Any) {
+        //Matar a tela e construir de novo
+    }
     
     //MARK:- Variables
     var mainPlane = SCNNode()
@@ -45,10 +53,13 @@ class Stage: UIViewController, ARSCNViewDelegate {
     var bombs: [Bomb] = [] {
         didSet {
             self.bombLabel.text = String(maxBombs - bombs.count)
+
+            if bombs.count > 0 {
+                self.explosionButton.isEnabled = true                
+            }
             
             if bombs.count >= maxBombs {
                 self.didPlaceBombs = true
-                self.explosionButton.isEnabled = true
             }
         }
     }
@@ -107,6 +118,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.bombLabel.text = String(maxBombs)
         
         self.explosionButton.isEnabled = false
+
+        self.pauseView.layer.cornerRadius = 10
+        
     }
     
     func setupSceneView() {
