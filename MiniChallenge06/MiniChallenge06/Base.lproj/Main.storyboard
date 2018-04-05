@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -127,23 +128,79 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wm0-z2-i5L">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2G-rC-xQt">
+                                <rect key="frame" x="10" y="627" width="56" height="30"/>
+                                <state key="normal" title="Explodir"/>
+                                <connections>
+                                    <action selector="explosionButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="SrI-dL-kx6"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-S1-5vG">
+                                <rect key="frame" x="290" y="74" width="75" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTJ-Ce-ZRf">
+                                <rect key="frame" x="10" y="74" width="75" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="PAUSE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="oqE-Un-ale"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kz7-oM-a3z">
+                                <rect key="frame" x="38" y="243" width="300" height="181"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTk-Bm-2be">
+                                        <rect key="frame" x="120" y="75" width="60" height="30"/>
+                                        <state key="normal" title="PLAY"/>
+                                        <connections>
+                                            <action selector="playButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="jdp-H0-Uw7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zTk-Bm-2be" firstAttribute="width" secondItem="Kz7-oM-a3z" secondAttribute="width" multiplier="0.2" id="I8Y-7s-uNa"/>
+                                    <constraint firstItem="zTk-Bm-2be" firstAttribute="centerY" secondItem="Kz7-oM-a3z" secondAttribute="centerY" id="Nca-Qd-eVP"/>
+                                    <constraint firstItem="zTk-Bm-2be" firstAttribute="centerX" secondItem="Kz7-oM-a3z" secondAttribute="centerX" id="WSD-xW-uR1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fxd-S1-5vG" firstAttribute="width" secondItem="Wm0-z2-i5L" secondAttribute="width" multiplier="0.2" id="5IM-c8-wLf"/>
+                            <constraint firstItem="OTJ-Ce-ZRf" firstAttribute="width" secondItem="Wm0-z2-i5L" secondAttribute="width" multiplier="0.2" id="80m-Lz-5Gh"/>
+                            <constraint firstItem="fxd-S1-5vG" firstAttribute="top" secondItem="8kh-z6-zA2" secondAttribute="top" constant="10" id="8Py-zU-BuJ"/>
+                            <constraint firstItem="8kh-z6-zA2" firstAttribute="trailing" secondItem="fxd-S1-5vG" secondAttribute="trailing" constant="10" id="F5D-IS-u80"/>
+                            <constraint firstItem="OTJ-Ce-ZRf" firstAttribute="leading" secondItem="8kh-z6-zA2" secondAttribute="leading" constant="10" id="IlF-VF-5pX"/>
+                            <constraint firstItem="Kz7-oM-a3z" firstAttribute="centerY" secondItem="ux2-ig-9Aj" secondAttribute="centerY" id="Kis-x8-JoS"/>
+                            <constraint firstItem="Kz7-oM-a3z" firstAttribute="height" secondItem="Wm0-z2-i5L" secondAttribute="height" multiplier="0.3" id="OHa-fT-kYD"/>
+                            <constraint firstItem="Kz7-oM-a3z" firstAttribute="centerX" secondItem="ux2-ig-9Aj" secondAttribute="centerX" id="P5k-hq-e6d"/>
+                            <constraint firstItem="8kh-z6-zA2" firstAttribute="bottom" secondItem="S2G-rC-xQt" secondAttribute="bottom" constant="10" id="Pe9-1f-yVe"/>
+                            <constraint firstItem="Kz7-oM-a3z" firstAttribute="width" secondItem="Wm0-z2-i5L" secondAttribute="width" multiplier="0.8" id="QSp-Ep-bMe"/>
                             <constraint firstItem="8kh-z6-zA2" firstAttribute="bottom" secondItem="Wm0-z2-i5L" secondAttribute="bottom" id="ciV-p9-1Zg"/>
                             <constraint firstItem="Wm0-z2-i5L" firstAttribute="leading" secondItem="8kh-z6-zA2" secondAttribute="leading" id="l8q-9n-EWH"/>
                             <constraint firstAttribute="trailing" secondItem="Wm0-z2-i5L" secondAttribute="trailing" id="lLD-Uq-THX"/>
+                            <constraint firstItem="OTJ-Ce-ZRf" firstAttribute="top" secondItem="8kh-z6-zA2" secondAttribute="top" constant="10" id="pPU-Wa-Nqf"/>
                             <constraint firstItem="Wm0-z2-i5L" firstAttribute="top" secondItem="8kh-z6-zA2" secondAttribute="top" id="uNF-ze-lO8"/>
+                            <constraint firstItem="S2G-rC-xQt" firstAttribute="leading" secondItem="8kh-z6-zA2" secondAttribute="leading" constant="10" id="xum-XS-5wq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8kh-z6-zA2"/>
                     </view>
                     <connections>
+                        <outlet property="bombLabel" destination="fxd-S1-5vG" id="4Sh-z8-TG1"/>
+                        <outlet property="explosionButton" destination="S2G-rC-xQt" id="DL0-Ns-bvX"/>
+                        <outlet property="pauseView" destination="Kz7-oM-a3z" id="akD-Ob-gam"/>
                         <outlet property="sceneView" destination="Wm0-z2-i5L" id="8jv-2B-osY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T6g-ur-9MH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="85"/>
+            <point key="canvasLocation" x="1017" y="99"/>
         </scene>
     </scenes>
     <resources>
