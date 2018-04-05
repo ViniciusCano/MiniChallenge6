@@ -36,6 +36,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.isPaused = false
     }
     
+    @IBAction func menuButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true) {
+            
+        }
+    }
     
     
     //MARK:- Variables
