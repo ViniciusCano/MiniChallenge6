@@ -21,6 +21,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var pauseView: UIView!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    let levelsViewController = LevelsViewController()
+    
     @IBAction func explosionButtonClicked(_ sender: Any) {
         if !isPaused {
             self.explodeBombs()
@@ -39,7 +41,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     @IBAction func menuButtonClicked(_ sender: Any) {
         self.dismiss(animated: true) {
-            
+
         }
     }
     
