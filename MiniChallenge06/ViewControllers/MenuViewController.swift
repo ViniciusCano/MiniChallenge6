@@ -40,6 +40,14 @@ class MenuViewController: UIViewController {
     override var prefersStatusBarHidden: Bool{
         return true
     }
+    
+    func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.portrait ]
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

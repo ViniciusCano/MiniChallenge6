@@ -37,6 +37,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         self.setupSceneView()
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +72,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Functions
     func setupSceneView() {
         //Debug Options
-        sceneView.debugOptions = [.showPhysicsShapes]
+        //sceneView.debugOptions = [.showPhysicsShapes]
         
         //Base Bonfigurations
         sceneView.delegate = self
@@ -160,6 +165,15 @@ class Stage: UIViewController, ARSCNViewDelegate {
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
+    
+    func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.portrait ]
+    }
+    
 }
 
 //MARK:- ARSCNViewDelegate
