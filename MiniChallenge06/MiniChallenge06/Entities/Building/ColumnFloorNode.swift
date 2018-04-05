@@ -17,7 +17,9 @@ class ColumnFloorNode: FloorNode{
         
         for (x, z) in coordinates{
             let column = SCNBox(width: blockSize, height: blockSize, length: blockSize, chamferRadius: 0)
-            column.firstMaterial?.diffuse.contents = UIColor.red
+            //column.firstMaterial?.diffuse.contents = UIImage(named: "Column")
+            column.firstMaterial?.diffuse.contents = UIColor.lightGray
+            
             let node = SCNNode(geometry: column)
 //            node.physicsBody?.friction = 1
 //            node.physicsBody?.restitution = 0
