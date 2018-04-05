@@ -16,10 +16,53 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
     
+    @IBOutlet weak var explosionButton: UIButton!
+    @IBOutlet weak var bombLabel: UILabel!
+    @IBOutlet weak var pauseView: UIView!
+    
+    @IBAction func explosionButtonClicked(_ sender: Any) {
+        if !isPaused {
+            self.explodeBombs()            
+        }
+    }
+    
+    @IBAction func pauseButtonClicked(_ sender: Any) {
+        self.pauseView.isHidden = false
+        self.isPaused = true
+    }
+    
+    @IBAction func playButtonClicked(_ sender: Any) {
+        self.pauseView.isHidden = true
+        self.isPaused = false
+    }
+    
+    @IBAction func menuButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true) {
+            
+        }
+    }
+    
+    @IBAction func restartClicked(_ sender: Any) {
+        //Matar a tela e construir de novo
+    }
+    
     //MARK:- Variables
     var mainPlane = SCNNode()
+    
     var maxBombs = 3
-    var bombs: [Bomb] = []
+    var bombs: [Bomb] = [] {
+        didSet {
+            self.bombLabel.text = String(maxBombs - bombs.count)
+
+            if bombs.count > 0 {
+                self.explosionButton.isEnabled = true                
+            }
+            
+            if bombs.count >= maxBombs {
+                self.didPlaceBombs = true
+            }
+        }
+    }
     
     let building = Building()
     
@@ -30,6 +73,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     var didSetBuilding = false
     
     var didPlaceBombs = false
+    
+    var isPaused = false
     
     
     //MARK:- Overrided Functions
@@ -42,6 +87,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         
+        self.setupHUD()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,24 +106,33 @@ class Stage: UIViewController, ARSCNViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let tap = touches.first else { return }
         
-        if !didSetBuilding {
-            self.addBuilding(touch: tap)
-        } else if bombs.count < maxBombs {
-            self.placeBomb(touch: tap)
-        } else {
-            print("Explodiu")
-            self.explodeBombs()
+        if !isPaused {
+            if !didSetBuilding {
+                self.addBuilding(touch: tap)
+            } else if bombs.count < maxBombs {
+                self.placeBomb(touch: tap)
+            }
         }
+        
     }
     
     //MARK:- Functions
+    func setupHUD() {
+        self.bombLabel.text = String(maxBombs)
+        
+        self.explosionButton.isEnabled = false
+
+        self.pauseView.layer.cornerRadius = 10
+        
+    }
+    
     func setupSceneView() {
         //Debug Options
         //sceneView.debugOptions = [.showPhysicsShapes]
         
         //Base Bonfigurations
         sceneView.delegate = self
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
      
         //Start world tracking for Plane Detection
         let configuration = ARWorldTrackingConfiguration()
@@ -153,6 +209,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
             self.building.activate(bomb: bomb)
             bomb.explode(power: 20)
         }
+        
+        self.explosionButton.isEnabled = false
     }
     
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
