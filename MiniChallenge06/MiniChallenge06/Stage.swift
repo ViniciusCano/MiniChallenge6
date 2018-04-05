@@ -18,7 +18,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Variables
     var mainPlane = SCNNode()
-    var bomb = Bomb(radius: 0.1)
+    var maxBombs = 3
+    var bombs: [Bomb] = []
+    
     let building = Building()
     
     //Control Variables
@@ -26,6 +28,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     var didUpdatePlane = false
     
     var didSetBuilding = false
+    
+    var didPlaceBombs = false
     
     
     //MARK:- Overrided Functions
@@ -52,9 +56,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         if !didSetBuilding {
             self.addBuilding(touch: tap)
+        } else if bombs.count < maxBombs {
+            self.placeBomb(touch: tap)
         } else {
-            self.building.activate(bomb: self.bomb)
-            self.bomb.explode(power: 20)
+            print("Explodiu")
+            self.explodeBombs()
         }
     }
     
@@ -118,10 +124,41 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         sceneView.scene.rootNode.addChildNode(building)
         self.didSetBuilding = true
+    }
+    
+    func placeBomb(touch: UITouch) {
         
-        //Add Bomb (Test)
-        self.bomb.position = SCNVector3.init(x + 0.5, y + 0.5, z)
+        let direction = self.getUserVector().0
+        let position = self.getUserVector().1
+        let x = direction.x + position.x
+        let y = direction.y + position.y
+        let z = direction.z + position.z
+        
+        let bomb = Bomb(radius: 0.1)
+        bomb.position = SCNVector3.init(x, y, z)
         sceneView.scene.rootNode.addChildNode(bomb)
+        self.bombs.append(bomb)
+        
+        print(bombs)
+
+    }
+    
+    func explodeBombs() {
+        for bomb in bombs {
+            self.building.activate(bomb: bomb)
+            bomb.explode(power: 20)
+        }
+    }
+    
+    func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
+        if let frame = self.sceneView.session.currentFrame {
+            let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
+            let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
+            let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+            
+            return (dir, pos)
+        }
+        return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
 }
 
