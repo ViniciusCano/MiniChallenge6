@@ -129,9 +129,10 @@ class Stage: UIViewController, ARSCNViewDelegate {
     func placeBomb(touch: UITouch) {
         
         let direction = self.getUserVector().0
-        let x = direction.x
-        let y = direction.y
-        let z = direction.z + 0.5
+        let position = self.getUserVector().1
+        let x = direction.x + position.x
+        let y = direction.y + position.y
+        let z = direction.z + position.z
         
         let bomb = Bomb(radius: 0.1)
         bomb.position = SCNVector3.init(x, y, z)
