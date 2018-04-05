@@ -21,6 +21,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     var bomb = Bomb(radius: 0.1)
     let building = Building()
     
+    var planeContact: [SCNNode] = []
+    
     //Control Variables
     var didSetPlane = false
     var didUpdatePlane = false
@@ -163,6 +165,27 @@ extension Stage {
         }
     }
 }
+
+extension Stage: SCNPhysicsContactDelegate {
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        if contact.nodeA == mainPlane {
+            planeContact.append(contact.nodeB)
+        }
+        if contact.nodeB == mainPlane {
+            planeContact.append(contact.nodeA)
+        }
+    }
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
+        if contact.nodeA == mainPlane {
+            planeContact.removeLast()
+        }
+        if contact.nodeB == mainPlane {
+            planeContact.removeLast()
+        }
+    }
+}
+
 
 //Float4x4 Extension
 extension float4x4 {
