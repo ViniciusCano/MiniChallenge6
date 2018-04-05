@@ -19,10 +19,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var explosionButton: UIButton!
     @IBOutlet weak var bombLabel: UILabel!
     @IBOutlet weak var pauseView: UIView!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func explosionButtonClicked(_ sender: Any) {
         if !isPaused {
-            self.explodeBombs()            
+            self.explodeBombs()
         }
     }
     
@@ -61,6 +62,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
             if bombs.count >= maxBombs {
                 self.didPlaceBombs = true
             }
+        }
+    }
+    var score = 0 {
+        didSet {
+            self.scoreLabel.text = String(score / bombs.count)
         }
     }
     
@@ -114,6 +120,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Functions
     func setupHUD() {
         self.bombLabel.text = String(maxBombs)
+        self.scoreLabel.text = String(self.score)
         
         self.explosionButton.isEnabled = false
 
@@ -201,10 +208,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     func explodeBombs() {
         for bomb in bombs {
-            self.building.activate(bomb: bomb)
-            bomb.explode(power: 20)
+            self.score += self.building.activate(bomb: bomb)
+            bomb.explode(power: 10)
         }
-        
         self.explosionButton.isEnabled = false
     }
     
