@@ -127,23 +127,33 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wm0-z2-i5L">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2G-rC-xQt">
+                                <rect key="frame" x="10" y="627" width="56" height="30"/>
+                                <state key="normal" title="Explodir"/>
+                                <connections>
+                                    <action selector="explosionButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="SrI-dL-kx6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="8kh-z6-zA2" firstAttribute="bottom" secondItem="S2G-rC-xQt" secondAttribute="bottom" constant="10" id="Pe9-1f-yVe"/>
                             <constraint firstItem="8kh-z6-zA2" firstAttribute="bottom" secondItem="Wm0-z2-i5L" secondAttribute="bottom" id="ciV-p9-1Zg"/>
                             <constraint firstItem="Wm0-z2-i5L" firstAttribute="leading" secondItem="8kh-z6-zA2" secondAttribute="leading" id="l8q-9n-EWH"/>
                             <constraint firstAttribute="trailing" secondItem="Wm0-z2-i5L" secondAttribute="trailing" id="lLD-Uq-THX"/>
                             <constraint firstItem="Wm0-z2-i5L" firstAttribute="top" secondItem="8kh-z6-zA2" secondAttribute="top" id="uNF-ze-lO8"/>
+                            <constraint firstItem="S2G-rC-xQt" firstAttribute="leading" secondItem="8kh-z6-zA2" secondAttribute="leading" constant="10" id="xum-XS-5wq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8kh-z6-zA2"/>
                     </view>
                     <connections>
+                        <outlet property="explosionButton" destination="S2G-rC-xQt" id="DL0-Ns-bvX"/>
                         <outlet property="sceneView" destination="Wm0-z2-i5L" id="8jv-2B-osY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T6g-ur-9MH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="85"/>
+            <point key="canvasLocation" x="1017" y="99"/>
         </scene>
     </scenes>
     <resources>

@@ -15,11 +15,23 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var explosionButton: UIButton!
+    
+    @IBAction func explosionButtonClicked(_ sender: Any) {
+        self.explodeBombs()
+    }
     
     //MARK:- Variables
     var mainPlane = SCNNode()
     var maxBombs = 3
-    var bombs: [Bomb] = []
+    var bombs: [Bomb] = [] {
+        didSet {
+            if bombs.count >= maxBombs {
+                self.didPlaceBombs = true
+                self.explosionButton.isEnabled = true
+            }
+        }
+    }
     
     let building = Building()
     
@@ -37,6 +49,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         self.setupSceneView()
+        self.setupView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,13 +72,14 @@ class Stage: UIViewController, ARSCNViewDelegate {
             self.addBuilding(touch: tap)
         } else if bombs.count < maxBombs {
             self.placeBomb(touch: tap)
-        } else {
-            print("Explodiu")
-            self.explodeBombs()
         }
     }
     
     //MARK:- Functions
+    func setupView() {
+        self.explosionButton.isEnabled = false
+    }
+    
     func setupSceneView() {
         //Debug Options
         sceneView.debugOptions = [.showPhysicsShapes]
