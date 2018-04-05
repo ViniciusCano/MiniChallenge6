@@ -16,8 +16,10 @@ class Bomb: SCNNode {
     override init() {
         super.init()
         
-        let bombSphereGeometry = SCNSphere(radius: 1)
-        self.geometry = bombSphereGeometry
+        
+        
+        
+        
     }
     
     init(radius: CGFloat) {

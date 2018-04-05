@@ -20,7 +20,7 @@ class Building: SCNNode {
         self.addChildNode(floor)
     }
     
-    func activate(bomb: Bomb) -> Int{
+    func activate(bomb: SCNNode) -> Int {
         self.movedNodes = 0
         let bombRoundedPositionX = round(1000 * bomb.worldPosition.x) / 1000 + 0.1
         let bombRoundedPositionY = round(1000 * bomb.worldPosition.y) / 1000 + 0.1
