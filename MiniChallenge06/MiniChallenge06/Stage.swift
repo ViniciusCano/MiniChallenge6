@@ -15,12 +15,28 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
+    
     @IBOutlet weak var explosionButton: UIButton!
     @IBOutlet weak var bombLabel: UILabel!
+    @IBOutlet weak var pauseView: UIView!
     
     @IBAction func explosionButtonClicked(_ sender: Any) {
-        self.explodeBombs()
+        if !isPaused {
+            self.explodeBombs()            
+        }
     }
+    
+    @IBAction func pauseButtonClicked(_ sender: Any) {
+        self.pauseView.isHidden = false
+        self.isPaused = true
+    }
+    
+    @IBAction func playButtonClicked(_ sender: Any) {
+        self.pauseView.isHidden = true
+        self.isPaused = false
+    }
+    
+    
     
     //MARK:- Variables
     var mainPlane = SCNNode()
@@ -47,6 +63,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     var didPlaceBombs = false
     
+    var isPaused = false
+    
     
     //MARK:- Overrided Functions
     override func viewDidLoad() {
@@ -72,11 +90,14 @@ class Stage: UIViewController, ARSCNViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let tap = touches.first else { return }
         
-        if !didSetBuilding {
-            self.addBuilding(touch: tap)
-        } else if bombs.count < maxBombs {
-            self.placeBomb(touch: tap)
+        if !isPaused {
+            if !didSetBuilding {
+                self.addBuilding(touch: tap)
+            } else if bombs.count < maxBombs {
+                self.placeBomb(touch: tap)
+            }
         }
+        
     }
     
     //MARK:- Functions
