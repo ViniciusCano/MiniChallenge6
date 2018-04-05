@@ -47,6 +47,8 @@ class FloorNode: SCNNode {
                 block.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/textura.jpg")
                 let node = SCNNode(geometry: block)
                 node.position = SCNVector3.init(blockSize * CGFloat(i), 0, blockSize * CGFloat(j))
+                //block.firstMaterial?.diffuse.contents = UIImage(named: "Wood4")
+                block.firstMaterial?.diffuse.contents = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 33.0/255.0, alpha: 1.0)
                 
                 node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: block, options: nil))
 //                node.physicsBody?.friction = 1
