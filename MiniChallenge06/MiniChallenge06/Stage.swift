@@ -19,10 +19,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var explosionButton: UIButton!
     @IBOutlet weak var bombLabel: UILabel!
     @IBOutlet weak var pauseView: UIView!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     @IBAction func explosionButtonClicked(_ sender: Any) {
         if !isPaused {
-            self.explodeBombs()            
+            self.explodeBombs()
         }
     }
     
@@ -63,8 +64,15 @@ class Stage: UIViewController, ARSCNViewDelegate {
             }
         }
     }
+    var score = 0 {
+        didSet {
+            self.scoreLabel.text = String(score / bombs.count)
+        }
+    }
     
     let building = Building()
+    
+    var planeContact: [SCNNode] = []
     
     //Control Variables
     var didSetPlane = false
@@ -119,6 +127,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Functions
     func setupHUD() {
         self.bombLabel.text = String(maxBombs)
+        self.scoreLabel.text = String(self.score)
         
         self.explosionButton.isEnabled = false
 
@@ -206,10 +215,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     func explodeBombs() {
         for bomb in bombs {
-            self.building.activate(bomb: bomb)
-            bomb.explode(power: 20)
+            self.score += self.building.activate(bomb: bomb)
+            bomb.explode(power: 10)
         }
-        
         self.explosionButton.isEnabled = false
     }
     
@@ -276,6 +284,27 @@ extension Stage {
         }
     }
 }
+
+extension Stage: SCNPhysicsContactDelegate {
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        if contact.nodeA == mainPlane {
+            planeContact.append(contact.nodeB)
+        }
+        if contact.nodeB == mainPlane {
+            planeContact.append(contact.nodeA)
+        }
+    }
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
+        if contact.nodeA == mainPlane {
+            planeContact.removeLast()
+        }
+        if contact.nodeB == mainPlane {
+            planeContact.removeLast()
+        }
+    }
+}
+
 
 //Float4x4 Extension
 extension float4x4 {
