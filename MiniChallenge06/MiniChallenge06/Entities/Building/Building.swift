@@ -17,7 +17,7 @@ class Building: SCNNode {
         self.addChildNode(floor)
     }
     
-    func activate(bomb: Bomb) {
+    func activate(bomb: SCNNode) {
         print(bomb.worldPosition)
         let bombRoundedPositionX = round(1000 * bomb.worldPosition.x) / 1000 + 0.1
         let bombRoundedPositionY = round(1000 * bomb.worldPosition.y) / 1000 + 0.1

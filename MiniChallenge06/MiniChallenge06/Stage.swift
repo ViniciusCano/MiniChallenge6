@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 
 class Stage: UIViewController, ARSCNViewDelegate {
-
+    
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
@@ -50,10 +50,10 @@ class Stage: UIViewController, ARSCNViewDelegate {
     var mainPlane = SCNNode()
     
     var maxBombs = 3
-    var bombs: [Bomb] = [] {
+    var bombs: [SCNNode] = [] {
         didSet {
             self.bombLabel.text = String(maxBombs - bombs.count)
-
+            
             if bombs.count > 0 {
                 self.explosionButton.isEnabled = true                
             }
@@ -90,7 +90,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.navigationController?.navigationBar.isTranslucent = true
         
         self.setupHUD()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +123,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.bombLabel.text = String(maxBombs)
         
         self.explosionButton.isEnabled = false
-
+        
         self.pauseView.layer.cornerRadius = 10
         
     }
@@ -135,7 +135,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         //Base Bonfigurations
         sceneView.delegate = self
         sceneView.showsStatistics = false
-     
+        
         //Start world tracking for Plane Detection
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
@@ -197,19 +197,32 @@ class Stage: UIViewController, ARSCNViewDelegate {
         let y = direction.y + position.y
         let z = direction.z + position.z
         
-        let bomb = Bomb(radius: 0.1)
-        bomb.position = SCNVector3.init(x, y, z)
-        sceneView.scene.rootNode.addChildNode(bomb)
-        self.bombs.append(bomb)
+        let bombScene = SCNScene(named: "Bomb.scn", inDirectory: "art.scnassets", options: nil)
+        let bomb = bombScene?.rootNode.childNode(withName: "Bomb", recursively: true)
+        bomb?.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Albedo.png")
+        bomb?.geometry?.materials[1].diffuse.contents = UIImage(named: "Albedo.png")
+        
+        
+        bomb?.position = SCNVector3.init(x, y, z)
+        sceneView.scene.rootNode.addChildNode(bomb!)
+        self.bombs.append(bomb!)
         
         print(bombs)
-
+        
     }
     
     func explodeBombs() {
         for bomb in bombs {
             self.building.activate(bomb: bomb)
-            bomb.explode(power: 20)
+            
+            let gravity = SCNPhysicsField.radialGravity()
+            gravity.strength = -20
+            gravity.falloffExponent = 0.5
+            
+            bomb.physicsField = gravity
+            bomb.runAction(SCNAction.sequence([SCNAction.wait(duration: 2),SCNAction.run({ (node) in
+                node.removeFromParentNode()
+            })]))
         }
         
         self.explosionButton.isEnabled = false
