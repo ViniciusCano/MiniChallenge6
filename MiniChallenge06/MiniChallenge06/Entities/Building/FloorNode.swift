@@ -28,7 +28,7 @@ class FloorNode: SCNNode {
         self.numberOfZBlocks = numberOfZBlocks
         
         let plane = SCNPlane(width: CGFloat(numberOfXBlocks) * blockSize, height: CGFloat(numberOfZBlocks) * blockSize)
-//        plane.firstMaterial?.diffuse.contents = UIColor.red
+        plane.firstMaterial?.diffuse.contents = UIColor.clear
         let planeNode = SCNNode(geometry: plane)
         planeNode.position = SCNVector3(
             ((CGFloat(numberOfXBlocks)*blockSize)/2) - blockSize/2,
