@@ -16,9 +16,43 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
     
+    @IBOutlet weak var explosionButton: UIButton!
+    @IBOutlet weak var bombLabel: UILabel!
+    @IBOutlet weak var pauseView: UIView!
+    
+    @IBAction func explosionButtonClicked(_ sender: Any) {
+        if !isPaused {
+            self.explodeBombs()            
+        }
+    }
+    
+    @IBAction func pauseButtonClicked(_ sender: Any) {
+        self.pauseView.isHidden = false
+        self.isPaused = true
+    }
+    
+    @IBAction func playButtonClicked(_ sender: Any) {
+        self.pauseView.isHidden = true
+        self.isPaused = false
+    }
+    
+    
+    
     //MARK:- Variables
     var mainPlane = SCNNode()
-    var bomb = Bomb(radius: 0.1)
+    
+    var maxBombs = 3
+    var bombs: [Bomb] = [] {
+        didSet {
+            self.bombLabel.text = String(maxBombs - bombs.count)
+            
+            if bombs.count >= maxBombs {
+                self.didPlaceBombs = true
+                self.explosionButton.isEnabled = true
+            }
+        }
+    }
+    
     let building = Building()
     
     var planeContact: [SCNNode] = []
@@ -29,12 +63,18 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     var didSetBuilding = false
     
+    var didPlaceBombs = false
+    
+    var isPaused = false
+    
     
     //MARK:- Overrided Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupSceneView()
+        self.setupHUD()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,22 +92,30 @@ class Stage: UIViewController, ARSCNViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let tap = touches.first else { return }
         
-        if !didSetBuilding {
-            self.addBuilding(touch: tap)
-        } else {
-            self.building.activate(bomb: self.bomb)
-            self.bomb.explode(power: 20)
+        if !isPaused {
+            if !didSetBuilding {
+                self.addBuilding(touch: tap)
+            } else if bombs.count < maxBombs {
+                self.placeBomb(touch: tap)
+            }
         }
+        
     }
     
     //MARK:- Functions
+    func setupHUD() {
+        self.bombLabel.text = String(maxBombs)
+        
+        self.explosionButton.isEnabled = false
+    }
+    
     func setupSceneView() {
         //Debug Options
         sceneView.debugOptions = [.showPhysicsShapes]
         
         //Base Bonfigurations
         sceneView.delegate = self
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
      
         //Start world tracking for Plane Detection
         let configuration = ARWorldTrackingConfiguration()
@@ -120,10 +168,43 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         sceneView.scene.rootNode.addChildNode(building)
         self.didSetBuilding = true
+    }
+    
+    func placeBomb(touch: UITouch) {
         
-        //Add Bomb (Test)
-        self.bomb.position = SCNVector3.init(x + 0.5, y + 0.5, z)
+        let direction = self.getUserVector().0
+        let position = self.getUserVector().1
+        let x = direction.x + position.x
+        let y = direction.y + position.y
+        let z = direction.z + position.z
+        
+        let bomb = Bomb(radius: 0.1)
+        bomb.position = SCNVector3.init(x, y, z)
         sceneView.scene.rootNode.addChildNode(bomb)
+        self.bombs.append(bomb)
+        
+        print(bombs)
+
+    }
+    
+    func explodeBombs() {
+        for bomb in bombs {
+            self.building.activate(bomb: bomb)
+            bomb.explode(power: 20)
+        }
+        
+        self.explosionButton.isEnabled = false
+    }
+    
+    func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
+        if let frame = self.sceneView.session.currentFrame {
+            let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
+            let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
+            let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+            
+            return (dir, pos)
+        }
+        return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
 }
 
