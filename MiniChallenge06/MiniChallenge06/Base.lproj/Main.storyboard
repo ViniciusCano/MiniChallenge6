@@ -135,15 +135,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-S1-5vG">
-                                <rect key="frame" x="290" y="74" width="75" height="23"/>
+                                <rect key="frame" x="290" y="30" width="75" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTJ-Ce-ZRf">
-                                <rect key="frame" x="10" y="74" width="75" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="PAUSE">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTJ-Ce-ZRf">
+                                <rect key="frame" x="10" y="30" width="75" height="50"/>
+                                <state key="normal" image="Pause_Button">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -151,25 +150,25 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kz7-oM-a3z">
-                                <rect key="frame" x="37" y="243" width="300" height="181"/>
+                                <rect key="frame" x="37" y="236.5" width="300" height="194"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueP-4E-xIn">
-                                        <rect key="frame" x="10" y="75" width="90" height="30"/>
-                                        <state key="normal" title="MENU"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueP-4E-xIn">
+                                        <rect key="frame" x="10" y="71.5" width="90" height="50"/>
+                                        <state key="normal" image="Menu_Button"/>
                                         <connections>
                                             <action selector="menuButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="81C-bB-Afj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTk-Bm-2be">
-                                        <rect key="frame" x="105" y="75" width="90" height="30"/>
-                                        <state key="normal" title="PLAY"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTk-Bm-2be">
+                                        <rect key="frame" x="105" y="71.5" width="90" height="50"/>
+                                        <state key="normal" image="Play_Button2"/>
                                         <connections>
                                             <action selector="playButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="jdp-H0-Uw7"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwv-Ae-Pv2">
-                                        <rect key="frame" x="200" y="75" width="90" height="30"/>
-                                        <state key="normal" title="RESTART"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwv-Ae-Pv2">
+                                        <rect key="frame" x="200" y="71.5" width="90" height="50"/>
+                                        <state key="normal" image="Restart_Button"/>
                                         <connections>
                                             <action selector="restartClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="OOH-aH-0gW"/>
                                         </connections>
@@ -226,6 +225,10 @@
         <image name="Fase1_Button" width="96" height="98"/>
         <image name="Fase2_Button" width="96" height="98"/>
         <image name="Logo" width="274" height="141"/>
+        <image name="Menu_Button" width="50" height="50"/>
+        <image name="Pause_Button" width="50" height="50"/>
         <image name="Play_Button" width="256" height="56"/>
+        <image name="Play_Button2" width="50" height="50"/>
+        <image name="Restart_Button" width="50" height="50"/>
     </resources>
 </document>

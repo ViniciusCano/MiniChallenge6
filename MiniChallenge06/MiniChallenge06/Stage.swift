@@ -86,7 +86,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupHUD()
 
     }
@@ -222,6 +222,10 @@ class Stage: UIViewController, ARSCNViewDelegate {
             return (dir, pos)
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
+    }
+    
+    override var prefersStatusBarHidden: Bool{
+        return true
     }
     
     func shouldAutorotate() -> Bool {
