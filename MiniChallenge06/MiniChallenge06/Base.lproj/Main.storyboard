@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -134,9 +135,18 @@
                                     <action selector="explosionButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="SrI-dL-kx6"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-S1-5vG">
+                                <rect key="frame" x="290" y="74" width="75" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fxd-S1-5vG" firstAttribute="width" secondItem="Wm0-z2-i5L" secondAttribute="width" multiplier="0.2" id="5IM-c8-wLf"/>
+                            <constraint firstItem="fxd-S1-5vG" firstAttribute="top" secondItem="8kh-z6-zA2" secondAttribute="top" constant="10" id="8Py-zU-BuJ"/>
+                            <constraint firstItem="8kh-z6-zA2" firstAttribute="trailing" secondItem="fxd-S1-5vG" secondAttribute="trailing" constant="10" id="F5D-IS-u80"/>
                             <constraint firstItem="8kh-z6-zA2" firstAttribute="bottom" secondItem="S2G-rC-xQt" secondAttribute="bottom" constant="10" id="Pe9-1f-yVe"/>
                             <constraint firstItem="8kh-z6-zA2" firstAttribute="bottom" secondItem="Wm0-z2-i5L" secondAttribute="bottom" id="ciV-p9-1Zg"/>
                             <constraint firstItem="Wm0-z2-i5L" firstAttribute="leading" secondItem="8kh-z6-zA2" secondAttribute="leading" id="l8q-9n-EWH"/>
@@ -147,6 +157,7 @@
                         <viewLayoutGuide key="safeArea" id="8kh-z6-zA2"/>
                     </view>
                     <connections>
+                        <outlet property="bombLabel" destination="fxd-S1-5vG" id="4Sh-z8-TG1"/>
                         <outlet property="explosionButton" destination="S2G-rC-xQt" id="DL0-Ns-bvX"/>
                         <outlet property="sceneView" destination="Wm0-z2-i5L" id="8jv-2B-osY"/>
                     </connections>

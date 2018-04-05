@@ -16,6 +16,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var explosionButton: UIButton!
+    @IBOutlet weak var bombLabel: UILabel!
     
     @IBAction func explosionButtonClicked(_ sender: Any) {
         self.explodeBombs()
@@ -23,9 +24,12 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Variables
     var mainPlane = SCNNode()
+    
     var maxBombs = 3
     var bombs: [Bomb] = [] {
         didSet {
+            self.bombLabel.text = String(maxBombs - bombs.count)
+            
             if bombs.count >= maxBombs {
                 self.didPlaceBombs = true
                 self.explosionButton.isEnabled = true
@@ -49,7 +53,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         self.setupSceneView()
-        self.setupView()
+        self.setupHUD()
 
     }
     
@@ -76,7 +80,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     
     //MARK:- Functions
-    func setupView() {
+    func setupHUD() {
+        self.bombLabel.text = String(maxBombs)
+        
         self.explosionButton.isEnabled = false
     }
     
@@ -86,7 +92,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         //Base Bonfigurations
         sceneView.delegate = self
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
      
         //Start world tracking for Plane Detection
         let configuration = ARWorldTrackingConfiguration()
@@ -163,6 +169,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
             self.building.activate(bomb: bomb)
             bomb.explode(power: 20)
         }
+        
+        self.explosionButton.isEnabled = false
     }
     
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
