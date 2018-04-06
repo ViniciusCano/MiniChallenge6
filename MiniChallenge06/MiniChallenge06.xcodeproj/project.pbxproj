@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		754D987B20772DD700016D2F /* UXKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754D987A20772DD700016D2F /* UXKit.swift */; };
 		7577BF42205B04B800B1F97F /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7577BF41205B04B800B1F97F /* Plane.swift */; };
 		B032D1692073F4EE00354213 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032D1682073F4EE00354213 /* MenuViewController.swift */; };
 		B032D16C2073FCA400354213 /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B032D16B2073FCA400354213 /* LevelsViewController.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		754D987A20772DD700016D2F /* UXKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXKit.swift; sourceTree = "<group>"; };
 		7577BF41205B04B800B1F97F /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		B032D1682073F4EE00354213 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B032D16B2073FCA400354213 /* LevelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		754D987920772DC400016D2F /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				754D987A20772DD700016D2F /* UXKit.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		7577BF43205B067000B1F97F /* World Detection */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 				7577BF43205B067000B1F97F /* World Detection */,
 				B0372609205AFC31007968B3 /* Bomb */,
 				B0372608205AFC24007968B3 /* Building */,
+				754D987920772DC400016D2F /* Support */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -268,6 +279,7 @@
 				B032D16C2073FCA400354213 /* LevelsViewController.swift in Sources */,
 				B03725E2205AFA20007968B3 /* Stage.swift in Sources */,
 				B0372603205AFBF1007968B3 /* FloorNode.swift in Sources */,
+				754D987B20772DD700016D2F /* UXKit.swift in Sources */,
 				B03725DE205AFA20007968B3 /* AppDelegate.swift in Sources */,
 				B0372605205AFBF1007968B3 /* Bomb.swift in Sources */,
 				B0372606205AFBF1007968B3 /* ColumnFloorNode.swift in Sources */,
