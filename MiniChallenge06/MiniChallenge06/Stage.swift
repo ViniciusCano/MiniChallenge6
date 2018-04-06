@@ -30,27 +30,41 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func pauseButtonClicked(_ sender: Any) {
-        self.pauseView.isHidden = false
+        self.pauseView.popIn(fromScale: 1, damping: 1, velocity: 1, duration: 0.8, delay: 0, options: UIViewAnimationOptions(), completion: nil)
         self.isPaused = true
     }
     
     @IBAction func playButtonClicked(_ sender: Any) {
-        self.pauseView.isHidden = true
+        self.pauseView.popOut(toScale: 0, pulseScale: 1, duration: 0.8, delay: 0, completion: nil)
         self.isPaused = false
     }
     
     @IBAction func menuButtonClicked(_ sender: Any) {
-        self.dismiss(animated: true) {
-
-        }
+        print("Botao apertado")
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func restartClicked(_ sender: Any) {
-        //Matar a tela e construir de novo
+        self.pauseView.popOut(toScale: 0, pulseScale: 1, duration: 0.8, delay: 0, completion: nil)
+        
+        self.maxBombs = 3
+        bombs.removeAll()
+        
+        self.score = 0
+        
+        self.building.removeFromParentNode()
+        self.building = Building()
+        guard let t = addBuildingTouch else { return }
+        self.addBuilding(touch: t)
+        
     }
     
     //MARK:- Variables
     var mainPlane = SCNNode()
+    var building = Building()
+    var addBuildingTouch: UITouch?
+    
+    var planeContact: [SCNNode] = []
     
     var maxBombs = 3
     var bombs: [SCNNode] = [] {
@@ -58,7 +72,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
             self.bombLabel.text = String(maxBombs - bombs.count)
             
             if bombs.count > 0 {
-                self.explosionButton.isEnabled = true                
+                self.explosionButton.isEnabled = true
             }
             
             if bombs.count >= maxBombs {
@@ -68,13 +82,14 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     var score = 0 {
         didSet {
-            self.scoreLabel.text = String(score / bombs.count)
+            if score == 0 {
+                self.scoreLabel.text = "0"
+            } else {
+                self.scoreLabel.text = String(score / bombs.count)                
+            }
         }
     }
     
-    let building = Building()
-    
-    var planeContact: [SCNNode] = []
     
     //Control Variables
     var didSetPlane = false
@@ -133,6 +148,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         self.explosionButton.isEnabled = false
         
+        self.pauseView.popOut(toScale: 0, pulseScale: 0, duration: 0, delay: 0, completion: nil)
         self.pauseView.layer.cornerRadius = 10
         
     }
@@ -152,6 +168,8 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     
     func addBuilding(touch: UITouch) {
+        //Save touch for restart pourpose
+        self.addBuildingTouch = touch
         
         //Add Building
         let tapLocation = touch.location(in: sceneView)
