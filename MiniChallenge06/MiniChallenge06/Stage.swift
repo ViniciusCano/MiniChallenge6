@@ -40,13 +40,12 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func menuButtonClicked(_ sender: Any) {
-        self.dismiss(animated: true) {
-
-        }
+        print("Botao apertado")
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func restartClicked(_ sender: Any) {
-        //Matar a tela e construir de novo
+        //Zerar variaveis da bomba e reconstruir o predio
     }
     
     //MARK:- Variables
