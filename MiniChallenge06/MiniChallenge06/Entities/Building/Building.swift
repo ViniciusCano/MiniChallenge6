@@ -34,7 +34,6 @@ class Building: SCNNode {
                 //2 - Tudo Negativo
                 //3 - X negativo Y positivo Z positivo
                 //4 - X e Y negativo Z positivo
-                
                 //5 - X e Z positivo Y negativo
                 //6 - X positivo Y e Z negativo
                 //7 - X e Y positivo e Z negativo
