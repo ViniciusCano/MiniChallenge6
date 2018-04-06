@@ -21,6 +21,7 @@
 		B0372605205AFBF1007968B3 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0372601205AFBF1007968B3 /* Bomb.swift */; };
 		B0372606205AFBF1007968B3 /* ColumnFloorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0372602205AFBF1007968B3 /* ColumnFloorNode.swift */; };
 		D834EB122076E18600ECEE0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D834EB112076E18500ECEE0D /* Assets.xcassets */; };
+		D834EB2D2077543D00ECEE0D /* Stage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834EB2C2077543D00ECEE0D /* Stage2.swift */; };
 		D8C798D72076E0D600095901 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D8C798D62076E0D600095901 /* art.scnassets */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		B0372601205AFBF1007968B3 /* Bomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
 		B0372602205AFBF1007968B3 /* ColumnFloorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnFloorNode.swift; sourceTree = "<group>"; };
 		D834EB112076E18500ECEE0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D834EB2C2077543D00ECEE0D /* Stage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage2.swift; sourceTree = "<group>"; };
 		D8C798D62076E0D600095901 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 				B03725EB205AFA20007968B3 /* Info.plist */,
 				D834EB112076E18500ECEE0D /* Assets.xcassets */,
 				D8C798D62076E0D600095901 /* art.scnassets */,
+				D834EB2C2077543D00ECEE0D /* Stage2.swift */,
 			);
 			path = MiniChallenge06;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				B03725E2205AFA20007968B3 /* Stage.swift in Sources */,
 				B0372603205AFBF1007968B3 /* FloorNode.swift in Sources */,
 				754D987B20772DD700016D2F /* UXKit.swift in Sources */,
+				D834EB2D2077543D00ECEE0D /* Stage2.swift in Sources */,
 				B03725DE205AFA20007968B3 /* AppDelegate.swift in Sources */,
 				B0372605205AFBF1007968B3 /* Bomb.swift in Sources */,
 				B0372606205AFBF1007968B3 /* ColumnFloorNode.swift in Sources */,
@@ -439,7 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7SE9929Z59;
+				DEVELOPMENT_TEAM = W84WSQX9M7;
 				INFOPLIST_FILE = MiniChallenge06/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = viniciuscano.MiniChallenge06;
@@ -454,7 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7SE9929Z59;
+				DEVELOPMENT_TEAM = W84WSQX9M7;
 				INFOPLIST_FILE = MiniChallenge06/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = viniciuscano.MiniChallenge06;
