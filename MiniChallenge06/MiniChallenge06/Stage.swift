@@ -222,14 +222,12 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     func explodeBombs() {
         for bomb in bombs {
-            self.building.activate(bomb: bomb)
-            
             let gravity = SCNPhysicsField.radialGravity()
             gravity.strength = -20
             gravity.falloffExponent = 0.5
             
             bomb.physicsField = gravity
-            bomb.runAction(SCNAction.sequence([SCNAction.wait(duration: 2),SCNAction.run({ (node) in
+            bomb.runAction(SCNAction.sequence([SCNAction.wait(duration: 0.2),SCNAction.run({ (node) in
                 node.removeFromParentNode()
             })]))
             self.score += self.building.activate(bomb: bomb)

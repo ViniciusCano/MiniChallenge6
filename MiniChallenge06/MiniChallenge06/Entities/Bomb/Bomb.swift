@@ -16,10 +16,6 @@ class Bomb: SCNNode {
     override init() {
         super.init()
         
-        
-        
-        
-        
     }
     
     init(radius: CGFloat) {
