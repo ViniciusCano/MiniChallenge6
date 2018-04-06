@@ -16,16 +16,23 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
     
-    @IBOutlet weak var explosionButton: UIButton!
+    //Game HUD
     @IBOutlet weak var bombLabel: UILabel!
-    @IBOutlet weak var pauseView: UIView!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var explosionButton: UIButton!
+    @IBOutlet weak var pauseView: UIView!
+    
+    //END Game
+    @IBOutlet weak var endView: UIView!
+    @IBOutlet weak var endScoreLabel: UILabel!
     
     let levelsViewController = LevelsViewController()
     
     @IBAction func explosionButtonClicked(_ sender: Any) {
         if !isPaused {
             self.explodeBombs()
+            
+            self.endGame()
         }
     }
     
@@ -40,14 +47,17 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func menuButtonClicked(_ sender: Any) {
-        print("Botao apertado")
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func restartClicked(_ sender: Any) {
-        self.pauseView.popOut(toScale: 0, pulseScale: 1, duration: 0.8, delay: 0, completion: nil)
         
+        self.pauseView.popOut(toScale: 0, pulseScale: 1, duration: 0.8, delay: 0, completion: nil)
+
         self.maxBombs = 3
+        for bomb in bombs {
+            bomb.removeFromParentNode()
+        }
         bombs.removeAll()
         
         self.score = 0
@@ -150,6 +160,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         self.pauseView.popOut(toScale: 0, pulseScale: 0, duration: 0, delay: 0, completion: nil)
         self.pauseView.layer.cornerRadius = 10
+        
+        self.endView.popOut(toScale: 0, pulseScale: 0, duration: 0, delay: 0, completion: nil)
+        self.endView.layer.cornerRadius = 10
         
     }
     
@@ -262,6 +275,20 @@ class Stage: UIViewController, ARSCNViewDelegate {
             return (dir, pos)
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
+    }
+    
+    func endGame() {
+        self.building.runAction(SCNAction.sequence([
+            SCNAction.wait(duration: 2),
+            SCNAction.run({ (node) in
+                DispatchQueue.main.async {
+                    self.endScoreLabel.text = String(self.score)
+                    self.endView.popIn(fromScale: 1, damping: 1, velocity: 1, duration: 0.8, delay: 0, options: UIViewAnimationOptions(), completion: nil)
+                }
+            })
+            ]))
+        
+        UserDefaults.standard.set(self.score, forKey: "level1")
     }
     
     override var prefersStatusBarHidden: Bool{
