@@ -15,6 +15,12 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    //Constraints
+    @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusLabelLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusLabelTrailingConstraint: NSLayoutConstraint!
     
     //Game HUD
     @IBOutlet weak var bombLabel: UILabel!
@@ -124,6 +130,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupHUD()
         
+        statusLabelTopConstraint.constant = view.frame.size.height * 0.2
+        statusLabelLeadingConstraint.constant = view.frame.size.width * 0.05
+        statusLabelTrailingConstraint.constant = view.frame.size.width * 0.05
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,6 +153,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         if !isPaused {
             if !didSetBuilding {
                 self.addBuilding(touch: tap)
+                self.statusLabel.text = ""
             } else if bombs.count < maxBombs {
                 self.placeBomb(touch: tap)
             }
@@ -315,6 +325,10 @@ extension Stage {
             self.mainPlane.eulerAngles.x = -.pi / 2
             node.addChildNode(mainPlane)
             
+            DispatchQueue.main.async {
+                self.statusLabel.text = "Toque na tela para adicionar um prédio"
+            }
+            
             self.didSetPlane = true
         }
     }
@@ -344,7 +358,7 @@ extension Stage {
     }
 }
 
-extension Stage: SCNPhysicsContactDelegate {
+extension Stage2: SCNPhysicsContactDelegate {
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         if contact.nodeA == mainPlane {
             planeContact.append(contact.nodeB)

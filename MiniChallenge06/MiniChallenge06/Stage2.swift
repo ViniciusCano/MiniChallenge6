@@ -15,12 +15,19 @@ class Stage2: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var statusLabel2: UILabel!
     
     //Game HUD
     @IBOutlet weak var bombLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var explosionButton: UIButton!
     @IBOutlet weak var pauseView: UIView!
+    
+    //Constraints
+    @IBOutlet weak var statusLabel2TopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusLabel2LeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusLabel2TrailingConstraint: NSLayoutConstraint!
+    
     
     //END Game
     @IBOutlet weak var endView: UIView!
@@ -124,6 +131,9 @@ class Stage2: UIViewController, ARSCNViewDelegate {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupHUD()
         
+        statusLabel2TopConstraint.constant = view.frame.size.height * 0.2
+        statusLabel2LeadingConstraint.constant = view.frame.size.width * 0.05
+        statusLabel2TrailingConstraint.constant = view.frame.size.width * 0.05
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,6 +154,7 @@ class Stage2: UIViewController, ARSCNViewDelegate {
         if !isPaused {
             if !didSetBuilding {
                 self.addBuilding(touch: tap)
+                self.statusLabel2.text = ""
             } else if bombs.count < maxBombs {
                 self.placeBomb(touch: tap)
             }
@@ -290,7 +301,7 @@ class Stage2: UIViewController, ARSCNViewDelegate {
 }
 
 //MARK:- ARSCNViewDelegate
-extension Stage {
+extension Stage2 {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if !didSetPlane {
             //Add Plane
@@ -298,6 +309,10 @@ extension Stage {
             self.mainPlane = Plane(with: planeAnchor)
             self.mainPlane.eulerAngles.x = -.pi / 2
             node.addChildNode(mainPlane)
+            
+            DispatchQueue.main.async {
+                self.statusLabel2.text = "Toque na tela para adicionar um prédio"
+            }
             
             self.didSetPlane = true
         }
