@@ -210,23 +210,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bwu-8c-4Vg">
                                 <rect key="frame" x="37.5" y="236.5" width="300" height="194"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgI-9C-hcd">
-                                        <rect key="frame" x="0.0" y="72" width="150" height="50"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgI-9C-hcd">
+                                        <rect key="frame" x="0.0" y="97" width="300" height="97"/>
                                         <state key="normal" image="Menu_Button"/>
+                                        <connections>
+                                            <action selector="menuButtonClicked:" destination="pkM-g3-ADA" eventType="touchUpInside" id="oez-8Q-Mu4"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIc-yz-2Fm">
-                                        <rect key="frame" x="150" y="72" width="150" height="50"/>
-                                        <state key="normal" image="Restart_Button"/>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pontuação" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIz-Yc-PbT">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="97"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="43"/>
+                                        <color key="textColor" red="0.61960784310000006" green="0.27058823529999998" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="TIc-yz-2Fm" secondAttribute="trailing" id="0cj-dD-XBJ"/>
-                                    <constraint firstItem="TIc-yz-2Fm" firstAttribute="width" secondItem="Bwu-8c-4Vg" secondAttribute="width" multiplier="0.5" id="5PM-tA-yqK"/>
-                                    <constraint firstItem="TIc-yz-2Fm" firstAttribute="centerY" secondItem="Bwu-8c-4Vg" secondAttribute="centerY" id="9hl-pm-Dmt"/>
-                                    <constraint firstItem="xgI-9C-hcd" firstAttribute="centerY" secondItem="Bwu-8c-4Vg" secondAttribute="centerY" id="MwT-Y6-coB"/>
-                                    <constraint firstItem="xgI-9C-hcd" firstAttribute="leading" secondItem="Bwu-8c-4Vg" secondAttribute="leading" id="wGF-FA-Y1d"/>
-                                    <constraint firstItem="xgI-9C-hcd" firstAttribute="width" secondItem="Bwu-8c-4Vg" secondAttribute="width" multiplier="0.5" id="yz8-WP-2W1"/>
+                                    <constraint firstItem="tIz-Yc-PbT" firstAttribute="top" secondItem="Bwu-8c-4Vg" secondAttribute="top" id="0YR-tf-vzt"/>
+                                    <constraint firstAttribute="trailing" secondItem="tIz-Yc-PbT" secondAttribute="trailing" id="Doj-ka-K0d"/>
+                                    <constraint firstItem="xgI-9C-hcd" firstAttribute="leading" secondItem="Bwu-8c-4Vg" secondAttribute="leading" id="KlE-cZ-nkU"/>
+                                    <constraint firstAttribute="bottom" secondItem="xgI-9C-hcd" secondAttribute="bottom" id="VsB-zY-Iai"/>
+                                    <constraint firstItem="tIz-Yc-PbT" firstAttribute="leading" secondItem="Bwu-8c-4Vg" secondAttribute="leading" id="fgu-n3-otn"/>
+                                    <constraint firstItem="xgI-9C-hcd" firstAttribute="height" secondItem="Bwu-8c-4Vg" secondAttribute="height" multiplier="0.5" id="kbm-0e-OHD"/>
+                                    <constraint firstItem="xgI-9C-hcd" firstAttribute="width" secondItem="Bwu-8c-4Vg" secondAttribute="width" id="xTi-GO-KiI"/>
+                                    <constraint firstItem="tIz-Yc-PbT" firstAttribute="height" secondItem="Bwu-8c-4Vg" secondAttribute="height" multiplier="0.5" id="yBS-v5-oPX"/>
+                                    <constraint firstItem="tIz-Yc-PbT" firstAttribute="centerX" secondItem="Bwu-8c-4Vg" secondAttribute="centerX" id="ybt-1b-gh2"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -266,6 +274,7 @@
                     </view>
                     <connections>
                         <outlet property="bombLabel" destination="fxd-S1-5vG" id="4Sh-z8-TG1"/>
+                        <outlet property="endScoreLabel" destination="tIz-Yc-PbT" id="zID-v6-IZY"/>
                         <outlet property="endView" destination="Bwu-8c-4Vg" id="pq4-LS-5M2"/>
                         <outlet property="explosionButton" destination="S2G-rC-xQt" id="DL0-Ns-bvX"/>
                         <outlet property="pauseView" destination="Kz7-oM-a3z" id="akD-Ob-gam"/>
