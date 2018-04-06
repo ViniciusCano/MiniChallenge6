@@ -16,10 +16,11 @@ class Stage: UIViewController, ARSCNViewDelegate {
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
     
-    @IBOutlet weak var explosionButton: UIButton!
     @IBOutlet weak var bombLabel: UILabel!
-    @IBOutlet weak var pauseView: UIView!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var explosionButton: UIButton!
+    @IBOutlet weak var pauseView: UIView!
+    @IBOutlet weak var endView: UIView!
     
     let levelsViewController = LevelsViewController()
     
@@ -150,6 +151,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         self.pauseView.popOut(toScale: 0, pulseScale: 0, duration: 0, delay: 0, completion: nil)
         self.pauseView.layer.cornerRadius = 10
+        
+        self.endView.popOut(toScale: 0, pulseScale: 0, duration: 0, delay: 0, completion: nil)
+        self.endView.layer.cornerRadius = 10
         
     }
     
