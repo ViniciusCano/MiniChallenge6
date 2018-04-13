@@ -355,7 +355,7 @@ extension Stage {
             
             self.didUpdatePlane = true
         }
-    }
+    }//
 }
 
 extension Stage2: SCNPhysicsContactDelegate {
