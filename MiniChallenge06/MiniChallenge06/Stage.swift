@@ -279,7 +279,7 @@ extension Stage {
             
             self.didUpdatePlane = true
         }
-    }
+    }//
 }
 
 //Float4x4 Extension
