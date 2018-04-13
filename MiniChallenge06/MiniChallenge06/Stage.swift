@@ -15,72 +15,44 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     //MARK:- Outlets and Actions
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var statusLabel: UILabel!
     
-    //Constraints
-    @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusLabelLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusLabelTrailingConstraint: NSLayoutConstraint!
-    
-    //Game HUD
-    @IBOutlet weak var bombLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var explosionButton: UIButton!
+    @IBOutlet weak var bombLabel: UILabel!
     @IBOutlet weak var pauseView: UIView!
-    
-    //END Game
-    @IBOutlet weak var endView: UIView!
-    @IBOutlet weak var endScoreLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     let levelsViewController = LevelsViewController()
     
     @IBAction func explosionButtonClicked(_ sender: Any) {
         if !isPaused {
             self.explodeBombs()
-            
-            self.endGame()
         }
     }
     
     @IBAction func pauseButtonClicked(_ sender: Any) {
-        self.pauseView.popIn(fromScale: 1, damping: 1, velocity: 1, duration: 0.8, delay: 0, options: UIViewAnimationOptions(), completion: nil)
+        self.pauseView.isHidden = false
         self.isPaused = true
     }
     
     @IBAction func playButtonClicked(_ sender: Any) {
-        self.pauseView.popOut(toScale: 0, pulseScale: 1, duration: 0.8, delay: 0, completion: nil)
+        self.pauseView.isHidden = true
         self.isPaused = false
     }
     
     @IBAction func menuButtonClicked(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) {
+            
+        }
     }
     
     @IBAction func restartClicked(_ sender: Any) {
-        
-        self.pauseView.popOut(toScale: 0, pulseScale: 1, duration: 0.8, delay: 0, completion: nil)
-
-        self.maxBombs = 3
-        for bomb in bombs {
-            bomb.removeFromParentNode()
-        }
-        bombs.removeAll()
-        
-        self.score = 0
-        
-        self.building.removeFromParentNode()
-        self.building = Building()
-        guard let t = addBuildingTouch else { return }
-        self.addBuilding(touch: t)
-        
+        //Matar a tela e construir de novo
     }
     
     //MARK:- Variables
     var mainPlane = SCNNode()
-    var building = Building()
-    var addBuildingTouch: UITouch?
     
-    var planeContact: [SCNNode] = []
+    var currentScene: GameScene?
     
     var maxBombs = 3
     var bombs: [SCNNode] = [] {
@@ -98,14 +70,13 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     var score = 0 {
         didSet {
-            if score == 0 {
-                self.scoreLabel.text = "0"
-            } else {
-                self.scoreLabel.text = String(score / bombs.count)                
-            }
+            self.scoreLabel.text = String(score / bombs.count)
         }
     }
     
+    var building = Building()
+    
+    var planeContact: [SCNNode] = []
     
     //Control Variables
     var didSetPlane = false
@@ -124,15 +95,14 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         self.setupSceneView()
         
+        building = (currentScene?.building)!
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.setupHUD()
         
-        statusLabelTopConstraint.constant = view.frame.size.height * 0.2
-        statusLabelLeadingConstraint.constant = view.frame.size.width * 0.05
-        statusLabelTrailingConstraint.constant = view.frame.size.width * 0.05
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,7 +123,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
         if !isPaused {
             if !didSetBuilding {
                 self.addBuilding(touch: tap)
-                self.statusLabel.text = ""
             } else if bombs.count < maxBombs {
                 self.placeBomb(touch: tap)
             }
@@ -168,11 +137,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         self.explosionButton.isEnabled = false
         
-        self.pauseView.popOut(toScale: 0, pulseScale: 0, duration: 0, delay: 0, completion: nil)
         self.pauseView.layer.cornerRadius = 10
-        
-        self.endView.popOut(toScale: 0, pulseScale: 0, duration: 0, delay: 0, completion: nil)
-        self.endView.layer.cornerRadius = 10
         
     }
     
@@ -191,8 +156,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
     }
     
     func addBuilding(touch: UITouch) {
-        //Save touch for restart pourpose
-        self.addBuildingTouch = touch
         
         //Add Building
         let tapLocation = touch.location(in: sceneView)
@@ -205,33 +168,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
         let y = translation.y
         let z = translation.z
         
-        
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
-        self.building.addFloor(floor: ColumnFloorNode(coordinates: [(0, 0), (0, 4), (4, 0), (4, 4)]))
-        self.building.addFloor(floor: FloorNode(numberOfXBlocks: 5, numberOfZBlocks: 5))
         
         self.building.position = SCNVector3.init(x, y + 0.2 / 2, z)
         
@@ -263,12 +199,14 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     func explodeBombs() {
         for bomb in bombs {
+            self.building.activate(bomb: bomb)
+            
             let gravity = SCNPhysicsField.radialGravity()
             gravity.strength = -20
             gravity.falloffExponent = 0.5
             
             bomb.physicsField = gravity
-            bomb.runAction(SCNAction.sequence([SCNAction.wait(duration: 0.2),SCNAction.run({ (node) in
+            bomb.runAction(SCNAction.sequence([SCNAction.wait(duration: 2),SCNAction.run({ (node) in
                 node.removeFromParentNode()
             })]))
             self.score += self.building.activate(bomb: bomb)
@@ -287,20 +225,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
     
-    func endGame() {
-        self.building.runAction(SCNAction.sequence([
-            SCNAction.wait(duration: 2),
-            SCNAction.run({ (node) in
-                DispatchQueue.main.async {
-                    self.endScoreLabel.text = String(self.score)
-                    self.endView.popIn(fromScale: 1, damping: 1, velocity: 1, duration: 0.8, delay: 0, options: UIViewAnimationOptions(), completion: nil)
-                }
-            })
-            ]))
-        
-        UserDefaults.standard.set(self.score, forKey: "level1")
-    }
-    
     override var prefersStatusBarHidden: Bool{
         return true
     }
@@ -311,6 +235,10 @@ class Stage: UIViewController, ARSCNViewDelegate {
     
     func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return [UIInterfaceOrientationMask.portrait ]
+    }
+    
+    func instantiateLevel(number: Int32) {
+        
     }
     
 }
@@ -324,10 +252,6 @@ extension Stage {
             self.mainPlane = Plane(with: planeAnchor)
             self.mainPlane.eulerAngles.x = -.pi / 2
             node.addChildNode(mainPlane)
-            
-            DispatchQueue.main.async {
-                self.statusLabel.text = "Toque na tela para adicionar um prédio"
-            }
             
             self.didSetPlane = true
         }
@@ -357,27 +281,6 @@ extension Stage {
         }
     }
 }
-
-extension Stage2: SCNPhysicsContactDelegate {
-    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        if contact.nodeA == mainPlane {
-            planeContact.append(contact.nodeB)
-        }
-        if contact.nodeB == mainPlane {
-            planeContact.append(contact.nodeA)
-        }
-    }
-    
-    func physicsWorld(_ world: SCNPhysicsWorld, didEnd contact: SCNPhysicsContact) {
-        if contact.nodeA == mainPlane {
-            planeContact.removeLast()
-        }
-        if contact.nodeB == mainPlane {
-            planeContact.removeLast()
-        }
-    }
-}
-
 
 //Float4x4 Extension
 extension float4x4 {
