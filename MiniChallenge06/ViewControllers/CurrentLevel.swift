@@ -18,7 +18,7 @@ class CurrentLevel: NSObject {
     /**
      Current level number retrieved from UserDefaults.
      */
-    static var number:Int32{
+    static var number: Int32? {
         get{
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let userFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Usuario")
@@ -30,7 +30,9 @@ class CurrentLevel: NSObject {
                     currentLevel = level[0].currentLevel
                 }
                 
-            }catch{}
+            }catch{
+                return nil
+            }
             //        let currentLevel = UserDefaults.standard.integer(forKey: CurrentLevel.key)
             return currentLevel
         }

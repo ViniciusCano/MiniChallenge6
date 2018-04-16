@@ -2,11 +2,13 @@ import SceneKit
 
 class GameScene: SCNScene {
     
+    var level: Int32 = 0
     var building = Building()
-    var bombs: Int = 0
+    var bombs: Int32 = 0
     
-    init(bombs: Int) {
+    init(level: Int32, bombs: Int32) {
         super.init()
+        self.level = level
         self.bombs = bombs
     }
     
