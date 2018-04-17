@@ -18,9 +18,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var statusLabel: UILabel!
     
     //Constraints
-    @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusLabelLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var statusLabelTrailingConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var statusLabelLeadingConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var statusLabelTrailingConstraint: NSLayoutConstraint!
     
     //Game HUD
     @IBOutlet weak var bombLabel: UILabel!
@@ -130,9 +130,9 @@ class Stage: UIViewController, ARSCNViewDelegate {
         
         building = (currentScene?.building)!
         
-        statusLabelTopConstraint.constant = view.frame.size.height * 0.2
-        statusLabelLeadingConstraint.constant = view.frame.size.width * 0.05
-        statusLabelTrailingConstraint.constant = view.frame.size.width * 0.05
+//        statusLabelTopConstraint.constant = view.frame.size.height * 0.2
+//        statusLabelLeadingConstraint.constant = view.frame.size.width * 0.05
+//        statusLabelTrailingConstraint.constant = view.frame.size.width * 0.05
     }
     
     override func viewWillAppear(_ animated: Bool) {
