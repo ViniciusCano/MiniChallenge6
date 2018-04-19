@@ -17,11 +17,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var statusLabel: UILabel!
     
-    //Constraints
-//    @IBOutlet weak var statusLabelTopConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var statusLabelLeadingConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var statusLabelTrailingConstraint: NSLayoutConstraint!
-    
     //Game HUD
     @IBOutlet weak var bombLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -37,7 +32,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
     @IBAction func explosionButtonClicked(_ sender: Any) {
         if !isPaused {
             self.explodeBombs()
-            
             self.endGame()
         }
     }
@@ -129,10 +123,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
         self.setupHUD()
         
         building = (currentScene?.building)!
-        
-//        statusLabelTopConstraint.constant = view.frame.size.height * 0.2
-//        statusLabelLeadingConstraint.constant = view.frame.size.width * 0.05
-//        statusLabelTrailingConstraint.constant = view.frame.size.width * 0.05
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -247,6 +237,7 @@ class Stage: UIViewController, ARSCNViewDelegate {
                 node.removeFromParentNode()
             })]))
             self.score += self.building.activate(bomb: bomb)
+            self.endScoreLabel.text = String(self.score)
         }
         self.explosionButton.isEnabled = false
     }
@@ -267,7 +258,6 @@ class Stage: UIViewController, ARSCNViewDelegate {
             SCNAction.wait(duration: 2),
             SCNAction.run({ (node) in
                 DispatchQueue.main.async {
-                    self.endScoreLabel.text = String(self.score)
                     self.endView.popIn(fromScale: 1, damping: 1, velocity: 1, duration: 0.8, delay: 0, options: UIViewAnimationOptions(), completion: nil)
                 }
             })
